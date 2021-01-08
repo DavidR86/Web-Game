@@ -17,6 +17,7 @@
 	    boardContainer.insertAdjacentElement("beforeend", cell);
 	    cell.addEventListener("click", function cellClick(e) {
 		console.log(e);
+		window.alert("clicked cell: "+e.target.id);
 	    });
 	}
     }
