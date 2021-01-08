@@ -8,3 +8,12 @@
     grid-template-columns: repeat(8, 1fr);
 }
 
+.black {
+    background-color: black;
+    color: white;
+}
+
+.white {
+    background-color: white;
+    color: black;
+}
