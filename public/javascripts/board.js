@@ -40,7 +40,14 @@
 		break;
 	    default:
 	}
-	this.get(x,y).appendChild(piece);
+	var prevChild = this.get(x, y).firstChild
+
+	if(prevChild === null){
+	    this.get(x, y).appendChild(piece);
+	}else{
+	    this.get(x,y).replaceChild(piece, prevChild);
+	}
+	
     }
 
     
@@ -50,7 +57,22 @@
     }
 
     Cells.prototype.removeHighlight = function(x, y){
-	this.get(x, y).className.replace("highlight", "");
+	this.get(x, y).className = this.get(x, y).className.replace("highlight", "");
+    }
+
+    Cells.prototype.removeAllHighlight = function(){
+	this.cells.forEach(cellX => {
+	    cellX.forEach(cell => {
+		this.removeHighlight(cell.x, cell.y);
+	    });
+	});
+    }
+
+    Cells.prototype.highlightCells = function(cells){
+	cells.forEach(cell => {
+	    console.log(cell)
+	    this.highlight(cell.x, cell.y);
+	});
     }
     
     // Get physical boards from html file
@@ -76,9 +98,35 @@
 		}
 	    boardContainer.insertAdjacentElement("beforeend", cell);
 	    cell.addEventListener("click", function cellClick(e) {
-		console.log(e.currentTarget);
+		let cell = event.currentTarget;
+		console.log(cell);
+		cells.removeAllHighlight();
 		//cells.addPiece(e.currentTarget.x, e.currentTarget.y, "rook", "white");
-		cells.highlight(e.currentTarget.x, e.currentTarget.y);
+		//cells.highlight(cell.x, cell.y);
+		if(cells.hasSelected && (turn === player && !(cells.firstChild === player))){
+		 
+		    // Attempt to move to this position
+
+		    let msg = messages.CHECK_MOVE;
+		    msg.fromX = cells.selected.x;
+		    msg.fromY = cells.selected.y;
+		    msg.toX = cell.x;
+		    msg.toY = cell.y;
+		    socket.send(JSON.stringify(msg));
+
+		}else if(cell.firstChild!=null && (cell.firstChild.color ===  player && player === turn)){
+		    console.log(cell.firstChild);
+
+		    // Ask for av moves
+		    let msg = messages.GET_AV_MOVES;
+		    msg.fromX = cell.x;
+		    msg.fromY = cell.y;
+		    socket.send(JSON.stringify(msg));
+
+		    cells.selected = cell;
+		    cells.hasSelected = true;
+		    
+		}
 
 	    });
 	}
@@ -124,4 +172,46 @@
     cells.addPiece(6, 1, "pawn", "black");
     cells.addPiece(7, 1, "pawn", "black");
 
+
+    var GAME_STARTED = false;
+    var player;
+    var turn = "white";
+    
+    const socket = new WebSocket("ws://localhost:3000");
+    socket.onmessage = function(event){
+	let msg = JSON.parse(event.data);
+
+	switch(msg.kind) {
+	    case messages.kind.GAME_START:
+		GAME_STARTED = true;
+		player = msg.player;
+		window.alert("Game started: you are "+msg.player);
+		break;
+	    case messages.kind.GAME_DISCONNECTED:
+		window.alert("Game disconnected");
+		console.log(msg);
+		break;
+	    case messages.kind.GAME_WON:
+		window.alert("Game won by: "+msg.player);
+		break;
+	    case messages.kind.PLAYER_MOVE:
+		cells.removePiece(msg.fromX, msg.fromY);
+		cells.addPiece(msg.toX, msg.toY, msg.piece, msg.player);
+		cells.hasSelected = false;
+		break;
+	    case messages.kind.AVAILABLE_MOVES:
+		cells.highlightCells(msg.data);
+		break;
+	    default:
+		console.log(msg);
+		
+	} 
+    };
+
+    socket.onopen = function(){
+	let msg = messages.INFO;
+	msg.data = "Client message"
+        socket.send(JSON.stringify(msg));
+    };
+    
 })();
