@@ -1,5 +1,6 @@
 @import "style.css";
 
+
 .container {
     margin: 0 auto;
     width: 640px;
@@ -9,11 +10,33 @@
 }
 
 .black {
-    background-color: black;
+    width: 80px;
+    height: 80px;
+    background-color: green;
     color: white;
 }
 
 .white {
-    background-color: white;
+    background-color: darkgray;
     color: black;
+    width: 80px;
+    height: 80px;
 }
+
+.piece_black {
+    height: 100%;
+    width: auto;
+    max-height: 100%;
+    margin: auto;
+    display: block;
+}
+
+.piece_white {
+    height: 100%;
+    width: auto;
+    max-height: 100%;
+    margin: auto;
+    display: block;
+    filter: invert(1);
+}
+

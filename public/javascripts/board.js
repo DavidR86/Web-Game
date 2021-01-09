@@ -5,69 +5,119 @@
     function Cell(x, y) {
 	this.x = x;
 	this.y = y;
+	this.hasPiece = false;
 	this.piece = null;
     }
 
     // Create logical board
-    function Board(cells) {
+    function Cells(cells) {
 	this.cells = cells;
 	this.selected = null;
+	this.hasSelected = false;
     }
     // TODO: Add helper methods to manipulate logical board.
-    Board.prototype.get = function(x, y){
-	return this.cells[x][y];
+    Cells.prototype.get = function(x, y){
+	return this.cells[y][x];
     }
-    Board.prototype.getUp = function(x, y){
+    Cells.prototype.getUp = function(x, y){
 	return this.cells[x][y-1];
     }
-    Board.prototype.getDown = function(x, y){
+    Cells.prototype.getDown = function(x, y){
 	return this.cells[x][y+1];
     }
-    Board.prototype.getLeft = function(x, y){
+    Cells.prototype.getLeft = function(x, y){
 	return this.cells[x-1][y];
     }
-    Board.prototype.getRight = function(x, y){
+    Cells.prototype.getRight = function(x, y){
 	return this.cells[x+1][y];
+    }
+
+    Cells.prototype.removePiece = function(x, y){
+	var parent = this.get(x, y);
+	while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
+	}
+    }
+
+    Cells.prototype.addPiece = function(x, y, kind, color){
+	var piece = document.createElement("img");
+	var added = (color == "white") ? "_b" : "_b";
+	piece.className = (color == "white") ? "piece_white" : "piece_black";
+	piece.alt = kind+""+added;
+	switch(kind) {
+	    case "pawn": piece.src = "images/pawn"+added+".svg"
+		break;
+	    case "rook": piece.src = "images/rook"+added+".svg"
+		break;
+	    case "bishop": piece.src = "images/bishop"+added+".svg"
+		break;
+	    case "knight": piece.src = "images/knight"+added+".svg"
+		break;
+	    case "queen": piece.src = "images/queen"+added+".svg"
+		break;
+	    case "king": piece.src = "images/king"+added+".svg"
+		break;
+	    default:
+	}
+	this.get(x,y).appendChild(piece);
+    }
+
+    
+    
+    Cells.prototype.highlight = function(x, y){
+	
     }
     
     // Get physical boards from html file
     var boardContainer = document.getElementById('board_container');
     boardContainer.className = "container";
-    var cells = new Array(8);
+    let cellsArr = new Array(8);
     
     // Create physical tiles in board
     for(var i = 0; i < 8; i++) {
-	cells[i] = new Array(8);
+	cellsArr[i] = new Array(8);
 	for(var j = 0; j < 8; j++) {
 	    var cell = document.createElement("div");
 	    cell.id = (i+1).toString()+"-"+(j+1).toString();
-	    cell.innerHTML="*"; // remove this later
 
-	    // Add logical cell to physical cell
-	    cell.lcell = new Cell(i,j);
-	    cells[i][j] = cell; // add cell to array
+	    cell.x=j;
+	    cell.y=i;
+	    cellsArr[i][j] = cell; // add cell to array
 	    
 	    if((i+j) % 2 == 0) {
-		cell.className = "black";
+		cell.className = "white";
 		} else {
-		    cell.className = "white";
+		    cell.className = "black";
 		}
 	    boardContainer.insertAdjacentElement("beforeend", cell);
 	    cell.addEventListener("click", function cellClick(e) {
-		console.log(e);
+		console.log(e.currentTarget);
+		cells.addPiece(e.currentTarget.x, e.currentTarget.y, "rook", "white");
 
-		if(board.selected==null){
-		    board.selected=e.target;
-		}else{
-		    e.target.innerHTML=board.selected.innerHTML;
-		    board.selected.innerHTML="*";
-		    board.selected=null;
-		}
 	    });
 	}
     }
 
-    var board = new Board(cells);
-    console.log(board);
-    board.get(7,4).innerHTML="=PIECE=";
+    var cells = new Cells(cellsArr);
+    console.log(cells);
+
+    // Put pieces
+    cells.addPiece(0, 7, "rook", "white");
+    cells.addPiece(1, 7, "knight", "white");
+    cells.addPiece(2, 7, "bishop", "white");
+    cells.addPiece(3, 7, "queen", "white");
+    cells.addPiece(4, 7, "king", "white");
+    cells.addPiece(5, 7, "bishop", "white");
+    cells.addPiece(6, 7, "knight", "white");
+    cells.addPiece(7, 7, "rook", "white");
+
+    cells.addPiece(0, 0, "rook", "black");
+    cells.addPiece(1, 0, "knight", "black");
+    cells.addPiece(2, 0, "bishop", "black");
+    cells.addPiece(3, 0, "queen", "black");
+    cells.addPiece(4, 0, "king", "black");
+    cells.addPiece(5, 0, "bishop", "black");
+    cells.addPiece(6, 0, "knight", "black");
+    cells.addPiece(7, 0, "rook", "black");
+
 })();
