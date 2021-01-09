@@ -92,6 +92,15 @@
     cells.addPiece(6, 7, "knight", "white");
     cells.addPiece(7, 7, "rook", "white");
 
+    cells.addPiece(0, 6, "pawn", "white");
+    cells.addPiece(1, 6, "pawn", "white");
+    cells.addPiece(2, 6, "pawn", "white");
+    cells.addPiece(3, 6, "pawn", "white");
+    cells.addPiece(4, 6, "pawn", "white");
+    cells.addPiece(5, 6, "pawn", "white");
+    cells.addPiece(6, 6, "pawn", "white");
+    cells.addPiece(7, 6, "pawn", "white");
+
     cells.addPiece(0, 0, "rook", "black");
     cells.addPiece(1, 0, "knight", "black");
     cells.addPiece(2, 0, "bishop", "black");
@@ -100,5 +109,14 @@
     cells.addPiece(5, 0, "bishop", "black");
     cells.addPiece(6, 0, "knight", "black");
     cells.addPiece(7, 0, "rook", "black");
+
+    cells.addPiece(0, 1, "pawn", "black");
+    cells.addPiece(1, 1, "pawn", "black");
+    cells.addPiece(2, 1, "pawn", "black");
+    cells.addPiece(3, 1, "pawn", "black");
+    cells.addPiece(4, 1, "pawn", "black");
+    cells.addPiece(5, 1, "pawn", "black");
+    cells.addPiece(6, 1, "pawn", "black");
+    cells.addPiece(7, 1, "pawn", "black");
 
 })();
