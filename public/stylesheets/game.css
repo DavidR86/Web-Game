@@ -12,16 +12,8 @@
 .black {
     width: 80px;
     height: 80px;
-    background-color: green;
+    background-color: darkolivegreen;
     color: white;
-}
-
-.black:hover {
-    background-color: grey;
-}
-
-.white:hover {
-    background-color: grey;
 }
 
 .white {
@@ -29,6 +21,24 @@
     color: black;
     width: 80px;
     height: 80px;
+}
+
+.black.highlight {
+    background-color: #eadd61;
+}
+
+.white.highlight {
+    background-color: khaki;
+}
+
+.black:hover {
+    // background-color: #7fa046;
+      filter: brightness(1.3);
+}
+
+.white:hover {
+    // background-color: #bfbfbf;
+      filter: brightness(1.1);
 }
 
 .piece_black {
@@ -46,4 +56,3 @@
     margin: auto;
     display: block;
 }
-

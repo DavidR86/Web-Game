@@ -46,7 +46,11 @@
     
     
     Cells.prototype.highlight = function(x, y){
-	
+	this.get(x,y).className+=" highlight";
+    }
+
+    Cells.prototype.removeHighlight = function(x, y){
+	this.get(x, y).className.replace("highlight", "");
     }
     
     // Get physical boards from html file
@@ -73,7 +77,8 @@
 	    boardContainer.insertAdjacentElement("beforeend", cell);
 	    cell.addEventListener("click", function cellClick(e) {
 		console.log(e.currentTarget);
-		cells.addPiece(e.currentTarget.x, e.currentTarget.y, "rook", "white");
+		//cells.addPiece(e.currentTarget.x, e.currentTarget.y, "rook", "white");
+		cells.highlight(e.currentTarget.x, e.currentTarget.y);
 
 	    });
 	}
