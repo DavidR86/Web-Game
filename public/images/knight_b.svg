@@ -1,5 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" version="1.1" style="shape-rendering:geometricPrecision;text-rendering:geometricPrecision;image-rendering:optimizeQuality;" viewBox="0 0 4615 10066.25" x="0px" y="0px" fill-rule="evenodd" clip-rule="evenodd"><defs><style type="text/css">
-   
-    .fil0 {fill:black;fill-rule:nonzero}
-   
-  </style></defs><g><path class="fil0" d="M4137 5424c-1219,0 -2439,0 -3659,0 -107,0 -105,161 0,161 1220,0 2440,0 3659,0 107,0 105,-161 0,-161z"/><path class="fil0" d="M4455 7497l-4308 0c27,59 27,112 0,170l4306 0c-26,-54 -25,-116 2,-170z"/><polygon class="fil0" points="4615,7790 0,7790 0,8053 4615,8053 "/><path class="fil0" d="M0 7374l4615 0 0 -866c0,-260 -264,-437 -532,-437l-3551 0c-267,0 -532,177 -532,437l0 866z"/><path class="fil0" d="M951 5947l2714 0c-68,-65 -115,-153 -129,-250l-2457 0c-14,97 -60,185 -128,250z"/><path class="fil0" d="M1651 82c-13,184 -7,402 -53,590 -46,190 -126,270 -203,386 -101,155 -124,318 -257,469 -134,152 -599,590 -639,689 -104,253 169,660 522,354 113,-99 147,-224 258,-247 227,-47 701,97 843,-283 43,-114 -18,-294 27,-382 24,-49 79,-59 119,-20 101,99 165,563 161,690 -17,520 -507,982 -849,1328 -473,480 -955,969 -875,1657l3231 0c11,-398 132,-814 258,-1245 231,-794 479,-1641 53,-2501 -371,-750 -1081,-1188 -1851,-1438 23,67 43,317 -29,407 -26,34 -61,48 -105,35 -66,-19 -116,-98 -167,-170 -108,-155 -179,-256 -371,-364 -88,-49 -66,-63 -73,45zm-894 2033l448 -461c83,-85 216,41 131,128l-448 461c-76,79 -217,-24 -131,-128z"/></g><text x="0" y="8068" fill="#000000" font-size="5px" font-weight="bold" font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif">Created by Joni Ramadhan</text><text x="0" y="8073" fill="#000000" font-size="5px" font-weight="bold" font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif">from the Noun Project</text></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="45" height="45">
+  <g style="opacity:1; fill:none; fill-opacity:1; fill-rule:evenodd; stroke:#000000; stroke-width:1.5; stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4; stroke-dasharray:none; stroke-opacity:1;">
+    <path
+      d="M 22,10 C 32.5,11 38.5,18 38,39 L 15,39 C 15,30 25,32.5 23,18"
+      style="fill:#000000; stroke:#000000;" />
+    <path
+      d="M 24,18 C 24.38,20.91 18.45,25.37 16,27 C 13,29 13.18,31.34 11,31 C 9.958,30.06 12.41,27.96 11,28 C 10,28 11.19,29.23 10,30 C 9,30 5.997,31 6,26 C 6,24 12,14 12,14 C 12,14 13.89,12.1 14,10.5 C 13.27,9.506 13.5,8.5 13.5,7.5 C 14.5,6.5 16.5,10 16.5,10 L 18.5,10 C 18.5,10 19.28,8.008 21,7 C 22,7 22,10 22,10"
+      style="fill:#000000; stroke:#000000;" />
+    <path
+      d="M 9.5 25.5 A 0.5 0.5 0 1 1 8.5,25.5 A 0.5 0.5 0 1 1 9.5 25.5 z"
+      style="fill:#ffffff; stroke:#ffffff;" />
+    <path
+      d="M 15 15.5 A 0.5 1.5 0 1 1  14,15.5 A 0.5 1.5 0 1 1  15 15.5 z"
+      transform="matrix(0.866,0.5,-0.5,0.866,9.693,-5.173)"
+      style="fill:#ffffff; stroke:#ffffff;" />
+    <path
+      d="M 24.55,10.4 L 24.1,11.85 L 24.6,12 C 27.75,13 30.25,14.49 32.5,18.75 C 34.75,23.01 35.75,29.06 35.25,39 L 35.2,39.5 L 37.45,39.5 L 37.5,39 C 38,28.94 36.62,22.15 34.25,17.66 C 31.88,13.17 28.46,11.02 25.06,10.5 L 24.55,10.4 z "
+      style="fill:#ffffff; stroke:none;" />
+  </g>
+</svg>

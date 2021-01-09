@@ -1,13 +1,4 @@
 (function () {
-    let cellBlack = '<div class="black">g</div>';
-    let cellWhite = '<div class="white">g</div>';
-
-    function Cell(x, y) {
-	this.x = x;
-	this.y = y;
-	this.hasPiece = false;
-	this.piece = null;
-    }
 
     // Create logical board
     function Cells(cells) {
@@ -19,18 +10,6 @@
     Cells.prototype.get = function(x, y){
 	return this.cells[y][x];
     }
-    Cells.prototype.getUp = function(x, y){
-	return this.cells[x][y-1];
-    }
-    Cells.prototype.getDown = function(x, y){
-	return this.cells[x][y+1];
-    }
-    Cells.prototype.getLeft = function(x, y){
-	return this.cells[x-1][y];
-    }
-    Cells.prototype.getRight = function(x, y){
-	return this.cells[x+1][y];
-    }
 
     Cells.prototype.removePiece = function(x, y){
 	var parent = this.get(x, y);
@@ -41,9 +20,11 @@
 
     Cells.prototype.addPiece = function(x, y, kind, color){
 	var piece = document.createElement("img");
-	var added = (color == "white") ? "_b" : "_b";
+	var added = (color == "white") ? "_w" : "_b";
 	piece.className = (color == "white") ? "piece_white" : "piece_black";
 	piece.alt = kind+""+added;
+	piece.kind = kind;
+	piece.color = color;
 	switch(kind) {
 	    case "pawn": piece.src = "images/pawn"+added+".svg"
 		break;

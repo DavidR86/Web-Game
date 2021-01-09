@@ -16,6 +16,14 @@
     color: white;
 }
 
+.black:hover {
+    background-color: grey;
+}
+
+.white:hover {
+    background-color: grey;
+}
+
 .white {
     background-color: darkgray;
     color: black;
@@ -37,6 +45,5 @@
     max-height: 100%;
     margin: auto;
     display: block;
-    filter: invert(1);
 }
 
