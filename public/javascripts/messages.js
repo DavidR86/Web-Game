@@ -44,7 +44,8 @@
 	toX: null,
 	fromY: null,
 	toY: null,
-	piece: null
+	piece: null,
+	piece_color: null
     }
 
     exports.AVAILABLE_MOVES = {

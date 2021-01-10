@@ -20,8 +20,8 @@
 
     Cells.prototype.addPiece = function(x, y, kind, color){
 	var piece = document.createElement("img");
-	var added = (color == "white") ? "_w" : "_b";
-	piece.className = (color == "white") ? "piece_white" : "piece_black";
+	var added = (color === "white") ? "_w" : "_b";
+	piece.className = (color === "white") ? "piece_white" : "piece_black";
 	piece.alt = kind+""+added;
 	piece.kind = kind;
 	piece.color = color;
@@ -113,6 +113,7 @@
 		    msg.toX = cell.x;
 		    msg.toY = cell.y;
 		    socket.send(JSON.stringify(msg));
+		    cells.hasSelected = false;
 
 		}else if(cell.firstChild!=null && (cell.firstChild.color ===  player && player === turn)){
 		    console.log(cell.firstChild);
@@ -126,6 +127,8 @@
 		    cells.selected = cell;
 		    cells.hasSelected = true;
 		    
+		}else{
+		    cells.hasSelected = false;
 		}
 
 	    });
@@ -196,7 +199,8 @@
 		break;
 	    case messages.kind.PLAYER_MOVE:
 		cells.removePiece(msg.fromX, msg.fromY);
-		cells.addPiece(msg.toX, msg.toY, msg.piece, msg.player);
+		cells.addPiece(msg.toX, msg.toY, msg.piece, msg.piece_color);
+		turn = msg.player;
 		cells.hasSelected = false;
 		break;
 	    case messages.kind.AVAILABLE_MOVES:
