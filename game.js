@@ -16,6 +16,7 @@ var game = function() {
 
     this.SANtoN = function(pos){
 	pos=pos.replace("+", "");
+	pos=pos.replace("#", "");
 	if(pos.length===3){
 	    return {x:(this.lToN(pos.charAt(1))), y:(8-Number(pos.charAt(2)))};
 	}else if(pos.length===4){
@@ -68,7 +69,7 @@ game.prototype.getAvailableMoves = function(fromX, fromY){
 
 game.prototype.checkMove = function(fromX, toX, fromY, toY){
     var move = this.chess.move({from: this.NtoSAN(fromX, fromY), to: this.NtoSAN(toX, toY)});
-    console.log(move);
+    // console.log(move);
 
     if(move===null){
 	return null;
