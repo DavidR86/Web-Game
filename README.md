@@ -16,8 +16,8 @@ Clone the repository, make sure to have npm and nodejs installed, go to the proj
 - Add list of rooms
 
 **Server:**
-- Game over, game start & game disconnected message sending 
-- Castling, promotions, victory detection & en passe
+- ~~Game over, game start & game disconnected message sending 
+- Castling, promotions, victory detection (~~checkmate~~, draw, stalemate) & en passe
 - Add support for statistics
 - Lobbys (Let people choose a room)
 
