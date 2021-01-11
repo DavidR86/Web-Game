@@ -23,11 +23,11 @@ Clone the repository, make sure to have npm and nodejs installed, go to the proj
 
 **Client:**
 - Board rotation when playing black pieces
-- Highlight last played piece
-- Change tab title content
-- Sound
+- ~~Highlight last played piece~~
+- ~~Change tab title content~~
+- ~~Sound~~
 - Information panel with clock & statistics
-- Add favicon
+- ~~Add favicon~~
 
 **Other:**
 - Chess piece image license
