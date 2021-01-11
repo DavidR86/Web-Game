@@ -57,7 +57,7 @@ var findGame = function(ws){
 	    key = Math.random();
     }
 	
-	gamesMap.set(key, {gameBoard: new GameLogic(), conn: [ws, null], available: true, players:1})
+	gamesMap.set(key, {gameBoard: new GameLogic(), conn: [ws, null], available: true, players:1, started: false})
     }
     
     // return game key
@@ -79,6 +79,7 @@ wss.on("connection", function (ws) {
 
 	msg.player = messages.player.WHITE;
 	gamesMap.get(gameKey).conn[1-player].send(JSON.stringify(msg));
+	gamesMap.get(gameKey).started=true;
     }
 
 
@@ -110,11 +111,40 @@ wss.on("connection", function (ws) {
 		    ws.send(JSON.stringify(answer));
 		    gamesMap.get(gameKey).conn[1-player].send(JSON.stringify(answer));
 		}
+
+		// Check for game over
+		var checkGameOver = game.checkGameOver();
+		console.log(game.checkGameOver())
+		if(checkGameOver.game_over){
+		    var answer = messages.GAME_WON;
+		    answer.player = checkGameOver.winner;
+		    ws.send(JSON.stringify(answer));
+		    gamesMap.get(gameKey).conn[1-player].send(JSON.stringify(answer));
+		}
+		
 		break;
 	    default:
 		console.log(msg);
 		
 	}
+    });
+
+    ws.on('close', function closed(event) {
+	console.log(event);
+
+	if(!gamesMap.has(gameKey)){return; }; // Game already deleted
+	
+	// Notify other player if game started
+	if(gamesMap.get(gameKey).started){
+	    let msg = messages.GAME_DISCONNECTED;
+	    console.log(msg);
+	    gamesMap.get(gameKey).conn[1-player].send(JSON.stringify(msg));
+	}
+	// Free resources.
+	if(gamesMap.get(gameKey).players==2){
+	    gamesMap.get(gameKey).conn[1-player].close();
+	}
+	gamesMap.delete(gameKey);
     });
 });
     

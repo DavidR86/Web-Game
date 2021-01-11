@@ -7,11 +7,10 @@
     height: 640px;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
 }
 
 .black {
-    width: 80px;
-    height: 80px;
     background-color: darkolivegreen;
     color: white;
 }
@@ -19,8 +18,12 @@
 .white {
     background-color: darkgray;
     color: black;
-    width: 80px;
-    height: 80px;
+}
+
+.last_move {
+    border-style: dotted;
+    border-width: 3px;
+    border-color: khaki;
 }
 
 .black.highlight {
@@ -28,7 +31,7 @@
 }
 
 .white.highlight {
-    background-color: khaki;
+    background-color: darkkhaki;
 }
 
 .black:hover {
@@ -45,6 +48,7 @@
     height: 100%;
     width: auto;
     max-height: 100%;
+    max-width: 100%;
     margin: auto;
     display: block;
 }
@@ -53,6 +57,7 @@
     height: 100%;
     width: auto;
     max-height: 100%;
+    max-width: 100%;
     margin: auto;
     display: block;
 }

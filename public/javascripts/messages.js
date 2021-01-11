@@ -33,8 +33,8 @@
 	player: null
     }
 
-    exports.PLAYER_DISCONNECTED = {
-	kind: exports.kind.PLAYER_DISCONNECTED
+    exports.GAME_DISCONNECTED = {
+	kind: exports.kind.GAME_DISCONNECTED
     }
 
     exports.PLAYER_MOVE = {

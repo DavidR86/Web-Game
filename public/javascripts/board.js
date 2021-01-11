@@ -60,6 +60,10 @@
 	this.get(x, y).className = this.get(x, y).className.replace("highlight", "");
     }
 
+    Cells.prototype.removeFocus = function(x, y){
+	this.get(x, y).className = this.get(x, y).className.replace("last_move", "");
+    }
+
     Cells.prototype.removeAllHighlight = function(){
 	this.cells.forEach(cellX => {
 	    cellX.forEach(cell => {
@@ -70,9 +74,20 @@
 
     Cells.prototype.highlightCells = function(cells){
 	cells.forEach(cell => {
-	    console.log(cell)
 	    this.highlight(cell.x, cell.y);
 	});
+    }
+
+    Cells.prototype.focusCells = function(x, y, x2, y2) {
+	// Only 2 at the time
+	this.cells.forEach(cellX => {
+	    cellX.forEach(cell => {
+		this.removeFocus(cell.x, cell.y);
+	    });
+	});
+	this.get(x, y).className+=" last_move";
+	this.get(x2, y2).className+=" last_move";
+
     }
     
     // Get physical boards from html file
@@ -189,6 +204,7 @@
 		GAME_STARTED = true;
 		player = msg.player;
 		window.alert("Game started: you are "+msg.player);
+		document.title = "Centaur: "+msg.player;
 		break;
 	    case messages.kind.GAME_DISCONNECTED:
 		window.alert("Game disconnected");
@@ -201,7 +217,13 @@
 		cells.removePiece(msg.fromX, msg.fromY);
 		cells.addPiece(msg.toX, msg.toY, msg.piece, msg.piece_color);
 		turn = msg.player;
+		console.log(turn+" "+player)
+		if(turn === player){ document.title+=" 🔔"; }else{document.title = document.title.replace(" 🔔", "");} // Tab bell icon
 		cells.hasSelected = false;
+
+		//Highlight last piece
+		cells.focusCells(msg.fromX, msg.fromY, msg.toX, msg.toY);
+		document.getElementById("moveSound").play();
 		break;
 	    case messages.kind.AVAILABLE_MOVES:
 		cells.highlightCells(msg.data);

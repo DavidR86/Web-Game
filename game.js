@@ -79,5 +79,16 @@ game.prototype.checkMove = function(fromX, toX, fromY, toY){
     }
 }
 
+game.prototype.checkGameOver = function(){
+    var checkMate = this.chess.in_checkmate();
+
+    if(checkMate){
+	return {game_over: true, type: "checkmate", winner:(this.chess.turn()==="w") ? "black" : "white"};
+    }else{
+	return {game_over: false};
+    }
+    
+}
+
 
 module.exports = game;
