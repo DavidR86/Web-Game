@@ -1,7 +1,11 @@
 # Web-Game
 TUD Web Assignment 1
 
-[The description of the game will go here]
+![chess image](media/chess1.png)
 
-Changes made
+### Overview
+A multiplayer web chess game with support for multiple rooms. 
+
+### Building & Running
+Clone the repository, make sure to have npm and nodejs installed, go to the project directory and run `npm start`. Then go to `localhost:3000` on your browser. You need 2 players for the game to start.
 
