@@ -91,8 +91,8 @@
     }
     
     // Get physical boards from html file
-    var boardContainer = document.getElementById('board_container');
-    boardContainer.className = "container";
+    var boardContainer = document.getElementById('board');
+    // boardContainer.className = "container";
     let cellsArr = new Array(8);
     
     // Create physical tiles in board
@@ -205,6 +205,14 @@
 		player = msg.player;
 		window.alert("Game started: you are "+msg.player);
 		document.title = "Centaur: "+msg.player;
+
+		// Draw board & pieces here
+		if(player === "black"){
+		    // rotate pieces
+		    document.querySelector(':root').style.setProperty("--rot", "rotate(180deg)");
+		    document.getElementById("board").style.setProperty("--shadow","");
+		 
+		}
 		break;
 	    case messages.kind.GAME_DISCONNECTED:
 		window.alert("Game disconnected");

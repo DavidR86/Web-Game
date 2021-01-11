@@ -1,13 +1,35 @@
 @import "style.css";
 
+:root {
+    --rot: rotate(0deg);
+    --shadow: 1px 1px 0px black,
+              2px 2px 0px black,
+              3px 3px 0px black,
+              4px 4px 0px black,
+              5px 5px 0px black,
+              6px 6px 0px black;
+}
 
-.container {
+#board_container {
+    box-shadow: var(--shadow);
+    width: fit-content;
+    max-width: 100%;
+    display: table;
+    margin: auto auto;
+	
+
+}
+
+#board {
     margin: 0 auto;
     width: 640px;
     height: 640px;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(8, 1fr);
+    border: 35px solid transparent;
+    border-image: url(../images/wood-texture.jpg) 300 repeat;
+    transform: var(--rot);
 }
 
 .black {
@@ -51,6 +73,7 @@
     max-width: 100%;
     margin: auto;
     display: block;
+    transform: var(--rot);
 }
 
 .piece_white {
@@ -60,4 +83,5 @@
     max-width: 100%;
     margin: auto;
     display: block;
+    transform: var(--rot);
 }
