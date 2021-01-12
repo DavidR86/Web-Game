@@ -3,9 +3,10 @@
 	const socket = new WebSocket("ws://localhost:3000");
 	socket.onmessage =  function(event){
 		let msg = JSON.parse(event.data);
-
+		console.log(msg);
 		if(msg.kind===messages.kind.STATISTICS_REQUEST){
-			
+			let stats = JSON.parse(msg.data);
+
 		}
 
 	}
@@ -18,7 +19,7 @@
 		totalGamesPlayed.textContent = startedGames;
 	}
 
-	function statAdded(){
+	 statAdded(){
 		var sumAllTimes = 0;
 		var playedGames = 0;
 		var fastestGame;
