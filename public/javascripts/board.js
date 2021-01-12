@@ -244,6 +244,12 @@ var outer_data = {getPos: null};
 		cells.focusCells(msg.data.from.x, msg.data.from.y, msg.data.to.x, msg.data.to.y, "red");
 		console.log(msg.data.string);
 		break;
+	    case messages.kind.REQUEST_GAME:
+	//	var room_key = msg.room_key;
+	//	console.log(msg);
+	//	window.location.search = "?room="+room_key
+		window.alert("Use the link to invite another player!");
+		break;
 	    default:
 		console.log(msg);
 		
@@ -259,6 +265,11 @@ var outer_data = {getPos: null};
 
     socket.onopen = function(){
 	let msg = messages.REQUEST_GAME;
+	const params = new URLSearchParams(window.location.search);
+	if(params.has("room")){
+	    msg.private_room = true;
+	    msg.room_key = params.get("room");
+	}
         socket.send(JSON.stringify(msg));
     };
     

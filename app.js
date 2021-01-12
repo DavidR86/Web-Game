@@ -13,9 +13,23 @@ var app = express();
 app.use(express.static(__dirname + "/public"));
 const server = http.createServer(app);
 
+let gamesMap = new Map();
+
 // Route for game (for development only)
 app.get('/game', function (req, res) {
     res.sendFile("game.html", {root: "./public"});
+})
+
+
+
+app.get('/game/p', function (req, res) {
+    var key = Math.random().toString().slice(2);
+    // Just in case
+    while(gamesMap.has(key)){
+	key = Math.random();
+	}
+    
+    res.redirect("/game?room="+key);
 })
 
 // Route for splash screen
@@ -27,7 +41,6 @@ const wss = new websocket.Server({ server });
 
 var GameLogic = require("./game");
 
-let gamesMap = new Map();
 // gamesMap.set(0 , {gameBoard:null conn:[null, null], available: true, players: 0});
 
 // var game = new GameLogic();
@@ -37,7 +50,7 @@ let gamesMap = new Map();
 var findGame = function(ws){
     var found = false;
 
-    var next = gamesMap.entries().next();
+    //var next = gamesMap.entries().next();
     var player;
     var key;
     gamesMap.forEach((game, gkey) => {
@@ -69,9 +82,36 @@ var findGame = function(ws){
     
 }
 
+var create_private_room = function(ws, key){
+    player = 0;
+    console.log(key)
+    gamesMap.set(key, {gameBoard: new GameLogic(), conn: [ws, null], available: false, players:1, started: false})
+    
+    let msg = messages.REQUEST_GAME;
+    //msg.room_key = key.toString().slice(2);
+    ws.send(JSON.stringify(msg));
+    
+    // return game key
+    return {key: key, player: player};
+}
+
+var join_private_room = function(ws, key){
+    console.log(key)
+    if(gamesMap.has(key) && gamesMap.get(key).players===1){
+	var game = gamesMap.get(key);
+	game.conn[1] = ws;
+	game.players++;
+	player=1;
+	return{key: key, player: player, joined: true};
+    }
+	ws.close();
+	return{joined: false};
+    
+}
+
 var findOpenGameNumber = function() {
     var number = 0;
-    var next = gamesMap.entries().next();
+    //var next = gamesMap.entries().next();
     gamesMap.forEach((game, gkey) => {
 	if(game.available){
 	    number++;
@@ -79,6 +119,15 @@ var findOpenGameNumber = function() {
     });
     return number;
 }
+
+var findPlayerNumber = function(){
+    var number = 0;
+    gamesMap.forEach((game, gkey) => {
+	number+=game.players;
+    });
+    return number;
+}
+
 var stockfish_socket;
 if(sf_enable){ stockfish_socket = new websocket("ws://10.66.65.5:3141");
 
@@ -110,7 +159,22 @@ wss.on("connection", function (ws) {
 	
 	switch(msg.kind) {
 	    case messages.kind.REQUEST_GAME:
-		found = findGame(ws);
+		var private_room = msg.private_room;
+		var room_key = parseFloat("0."+msg.room_key);
+		console.log(msg)
+
+		if(private_room && (!gamesMap.has(room_key))){
+		    console.log("create_private")
+		    found = create_private_room(ws, room_key);
+		}else if(private_room && gamesMap.has(room_key)){
+		    found = join_private_room(ws, room_key);
+		    console.log("join_private")
+		    if(!found.joined) break;
+		}else{
+		    found = findGame(ws);
+		}
+
+		// found = findGame(ws);
 		// console.log(found);
 		player = found.player;
 		gameKey = found.key;
@@ -128,8 +192,8 @@ wss.on("connection", function (ws) {
 	    case messages.kind.STATISTICS_REQUEST:
 		var answer = msg;
 		
-		msg.data = {playerNumber: gamesMap.size, openRooms: findOpenGameNumber(), time: "not available"}
-
+		msg.data = {playerNumber: findPlayerNumber(), openRooms: findOpenGameNumber(), time: "not available"}
+		ws.send(JSON.stringify(answer));
 		break;
 	    case messages.kind.GET_AV_MOVES:
 		var game = gamesMap.get(gameKey).gameBoard;

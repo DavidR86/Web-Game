@@ -14,9 +14,13 @@
         <h2>Click play to launch a game!</h2>
       <section id="right">
           <form action="/game" method="get">
-              <button type="submit">PLAY</button>
+              <button type="submit">Public Game</button>
+          </form>
+          <form action="/game/p" method="get">
+              <button type="submit">Create Private Room</button>
           </form>
       </section>
+      <script src="javascripts/messages.js"></script>
       <script src="javascripts/splash.js"></script>
     </main>
   </body>

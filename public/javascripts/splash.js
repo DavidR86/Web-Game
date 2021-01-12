@@ -1,5 +1,6 @@
 	
-function(){
+
+(function(){
 
 
 	const socket = new WebSocket("ws://localhost:3000");
@@ -12,17 +13,13 @@ function(){
 
 	
 
-	socket.onmessage = function(){
+	socket.onmessage = function(event){
 		let msg = JSON.parse(event.data);
-		if(msg.kind===messages.kind.STATISTICS_REQUEST){
-			let stats = JSON.parse(msg.data);
-			let totalTime = stats.time;
-			let openRooms = stats.openRooms;
-			let currentGames = stats.gamesNumber;
-			console.log(totalTime);
-			console.log(openRooms);
-			console.log(currentGames)
-			//statUpdate();
+	    if(msg.kind===messages.kind.STATISTICS_REQUEST){
+		console.log(msg)
+			let totalTime = msg.time;
+			let openRooms = msg.openRooms;
+			let currentGames = msg.gamesNumber;
 		}
 	}
-}	
+})();

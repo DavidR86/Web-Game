@@ -34,7 +34,9 @@
     }
 
     exports.REQUEST_GAME = {
-	kind: exports.kind.REQUEST_GAME
+	kind: exports.kind.REQUEST_GAME,
+	private_room: false,
+	room_key: null,
     }
 
     exports.GAME_START = {
