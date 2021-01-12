@@ -68,20 +68,35 @@ var findGame = function(ws){
     return {key: key, player: player};
     
 }
+
+var findOpenGameNumber = function() {
+    var number = 0;
+    var next = gamesMap.entries().next();
+    gamesMap.forEach((game, gkey) => {
+	if(game.available){
+	    number++;
+	}
+    });
+    return number;
+}
 var st_queue = [];
 
 wss.on("connection", function (ws) {
-
+    var player;
+    var gamekey;
+    var found;
+    var stockfish;
 
     ws.on("message", function incoming(message) {
 	let msg = JSON.parse(message);
 
+	
 	switch(msg.kind) {
 	    case messages.kind.REQUEST_GAME:
-		var found = findGame(ws);
+		found = findGame(ws);
 		// console.log(found);
-		var player = found.player;
-		var gameKey = found.key;
+		player = found.player;
+		gameKey = found.key;
 
 		if(player===1){
 		    let msg = messages.GAME_START;
@@ -93,7 +108,7 @@ wss.on("connection", function (ws) {
 		    gamesMap.get(gameKey).started=true;
 		}
 
-		var stockfish = new Stockfish();
+		stockfish = new Stockfish();
 		stockfish.onmessage = function(event){
 		    console.log(event);
 		    if(event.includes("bestmove ")){
@@ -107,6 +122,12 @@ wss.on("connection", function (ws) {
 			ws.send(JSON.stringify(answer));
 		    }
 		}
+		break;
+	    case messages.kind.STATISTICS_REQUEST:
+		var answer = msg;
+		
+		msg.data = {playerNumber: gamesMap.size, openRooms: findOpenGameNumber(), time: "not available"}
+
 		break;
 	    case messages.kind.GET_AV_MOVES:
 		var game = gamesMap.get(gameKey).gameBoard;
