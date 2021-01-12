@@ -11,15 +11,16 @@ Clone the repository, make sure to have npm and nodejs installed, go to the proj
 
 ### Left to implement:
 **Splash screen:**
-- Add css
+- ~~Add css~~
 - Add panel for statistics
-- Add list of rooms
+- Better css
+
 
 **Server:**
 - ~~Game over, game start & game disconnected message sending~~
-- Castling, promotions, victory detection (~~checkmate~~, draw, stalemate) & en passe
-- Add support for statistics
-- Lobbys (Let people choose a room)
+- ~~Castling~~, promotions, victory detection (~~checkmate~~, draw, stalemate) & en passe
+- ~~Add support for statistics~~
+- ~~Lobbys (Let people choose make a private room)~~
 
 **Client:**
 - ~~Board rotation when playing black pieces~~
@@ -28,6 +29,7 @@ Clone the repository, make sure to have npm and nodejs installed, go to the proj
 - ~~Sound~~
 - Information panel with clock & statistics
 - ~~Add favicon~~
+- Better css
 
 **Other:**
 - Chess piece image license
