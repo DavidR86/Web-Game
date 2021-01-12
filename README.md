@@ -22,7 +22,7 @@ Clone the repository, make sure to have npm and nodejs installed, go to the proj
 - Lobbys (Let people choose a room)
 
 **Client:**
-- Board rotation when playing black pieces
+- ~~Board rotation when playing black pieces~~
 - ~~Highlight last played piece~~
 - ~~Change tab title content~~
 - ~~Sound~~
