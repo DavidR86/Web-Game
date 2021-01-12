@@ -13,12 +13,16 @@
 	// Client to server
 	GET_AV_MOVES: 6,
 	CHECK_MOVE: 7,
+	REQUEST_GAME: 12,
 
 	// Data, client to server
 	POSITION_REQUEST: 9,
 
 	// Data, server to client
 	POSITION_RESPONSE: 10,
+
+	// To server
+	STATISTICS_REQUEST: 11,
 
 	// Both
 	INFO: 8
@@ -29,9 +33,18 @@
 	WHITE: "white"
     }
 
+    exports.REQUEST_GAME = {
+	kind: exports.kind.REQUEST_GAME
+    }
+
     exports.GAME_START = {
 	kind: exports.kind.GAME_START,
 	player: null
+    }
+
+    exports.STATISTICS_REQUEST = {
+	kind: exports.kind.STATISTICS_REQUEST,
+	data: null
     }
 
     exports.POSITION_REQUEST = {

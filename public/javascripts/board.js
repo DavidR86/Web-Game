@@ -258,8 +258,7 @@ var outer_data = {getPos: null};
     outer_data.getPos = getPos;
 
     socket.onopen = function(){
-	let msg = messages.INFO;
-	msg.data = "Client message"
+	let msg = messages.REQUEST_GAME;
         socket.send(JSON.stringify(msg));
     };
     
