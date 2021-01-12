@@ -1,4 +1,6 @@
-(function () {
+var outer_data = {getPos: null};
+
+(function (outer_data) {
 
     // Create logical board
     function Cells(cells) {
@@ -57,11 +59,13 @@
     }
 
     Cells.prototype.removeHighlight = function(x, y){
-	this.get(x, y).className = this.get(x, y).className.replace("highlight", "");
+	this.get(x, y).className = this.get(x, y).className.replace(" highlight", "");
+	
     }
 
     Cells.prototype.removeFocus = function(x, y){
-	this.get(x, y).className = this.get(x, y).className.replace("last_move", "");
+	this.get(x, y).className = this.get(x, y).className.replace(" last_move", "");
+	this.get(x, y).className = this.get(x, y).className.replace(" position", "");
     }
 
     Cells.prototype.removeAllHighlight = function(){
@@ -78,15 +82,15 @@
 	});
     }
 
-    Cells.prototype.focusCells = function(x, y, x2, y2) {
+    Cells.prototype.focusCells = function(x, y, x2, y2, color) {
 	// Only 2 at the time
 	this.cells.forEach(cellX => {
 	    cellX.forEach(cell => {
 		this.removeFocus(cell.x, cell.y);
 	    });
 	});
-	this.get(x, y).className+=" last_move";
-	this.get(x2, y2).className+=" last_move";
+	this.get(x, y).className+=(color === "yellow") ? " last_move" : " position";
+	this.get(x2, y2).className+=(color === "yellow") ? " last_move": " position";
 
     }
     
@@ -230,11 +234,15 @@
 		cells.hasSelected = false;
 
 		//Highlight last piece
-		cells.focusCells(msg.fromX, msg.fromY, msg.toX, msg.toY);
+		cells.focusCells(msg.fromX, msg.fromY, msg.toX, msg.toY, "yellow");
 		document.getElementById("moveSound").play();
 		break;
 	    case messages.kind.AVAILABLE_MOVES:
 		cells.highlightCells(msg.data);
+		break;
+	    case messages.kind.POSITION_RESPONSE:
+		cells.focusCells(msg.data.from.x, msg.data.from.y, msg.data.to.x, msg.data.to.y, "red");
+		console.log(msg.data.string);
 		break;
 	    default:
 		console.log(msg);
@@ -242,10 +250,17 @@
 	} 
     };
 
+    var getPos = function(){
+	var msg = messages.POSITION_REQUEST;
+	socket.send(JSON.stringify(msg));
+    }
+
+    outer_data.getPos = getPos;
+
     socket.onopen = function(){
 	let msg = messages.INFO;
 	msg.data = "Client message"
         socket.send(JSON.stringify(msg));
     };
     
-})();
+})(outer_data);

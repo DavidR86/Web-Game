@@ -9,6 +9,7 @@
               5px 5px 0px black,
               6px 6px 0px black;
 }
+html {background-color: lightgray}
 
 #board_container {
     box-shadow: var(--shadow);
@@ -47,6 +48,13 @@
     border-width: 3px;
     border-color: khaki;
 }
+
+.position {
+    border-style: dotted;
+    border-width: 3px;
+    border-color: brown;
+}
+
 
 .black.highlight {
     background-color: #eadd61;

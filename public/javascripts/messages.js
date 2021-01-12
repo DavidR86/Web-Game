@@ -14,6 +14,12 @@
 	GET_AV_MOVES: 6,
 	CHECK_MOVE: 7,
 
+	// Data, client to server
+	POSITION_REQUEST: 9,
+
+	// Data, server to client
+	POSITION_RESPONSE: 10,
+
 	// Both
 	INFO: 8
     };
@@ -28,6 +34,15 @@
 	player: null
     }
 
+    exports.POSITION_REQUEST = {
+	kind: exports.kind.POSITION_REQUEST,
+    }
+
+    exports.POSITION_RESPONSE = {
+	kind: exports.kind.POSITION_RESPONSE,
+	data: null
+    }
+    
     exports.GAME_WON = {
 	kind: exports.kind.GAME_WON,
 	player: null

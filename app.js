@@ -1,3 +1,4 @@
+
 var express = require("express");
 var http = require("http");
 const websocket = require("ws");
@@ -29,6 +30,9 @@ let gamesMap = new Map();
 // gamesMap.set(0 , {gameBoard:null conn:[null, null], available: true, players: 0});
 
 // var game = new GameLogic();
+
+var Stockfish = require("stockfish");
+
 
 var findGame = function(ws){
     var found = false;
@@ -64,9 +68,9 @@ var findGame = function(ws){
     return {key: key, player: player};
     
 }
+var st_queue = [];
 
 wss.on("connection", function (ws) {
-
     var found = findGame(ws);
     // console.log(found);
     var player = found.player;
@@ -82,6 +86,20 @@ wss.on("connection", function (ws) {
 	gamesMap.get(gameKey).started=true;
     }
 
+    var stockfish = new Stockfish();
+    stockfish.onmessage = function(event){
+	console.log(event);
+	if(event.includes("bestmove ")){
+	    var answer = messages.POSITION_RESPONSE;
+	    var data = st_queue.pop();
+	    var ws = data.ws;
+	    var game = data.game;
+	    var move = game.bestmoveToCoord(event);
+	    answer.data = game.bestmoveToCoord(event);
+	    answer.data.string = event;
+	    ws.send(JSON.stringify(answer));
+	}
+    }
 
     ws.on("message", function incoming(message) {
 	let msg = JSON.parse(message);
@@ -110,6 +128,18 @@ wss.on("connection", function (ws) {
 		    answer.piece_color = move.piece_color;
 		    ws.send(JSON.stringify(answer));
 		    gamesMap.get(gameKey).conn[1-player].send(JSON.stringify(answer));
+
+		    // Extra moves like castling, promotions & en passant. Only caslting working for now.
+		    if(move.additionalMove){
+			answer.fromX = move.additionalCoord.from.x;
+			answer.fromY = move.additionalCoord.from.y;
+			answer.toX = move.additionalCoord.to.x;
+			answer.toY = move.additionalCoord.to.y;
+			answer.piece = move.additionalPiece;
+			ws.send(JSON.stringify(answer));
+			gamesMap.get(gameKey).conn[1-player].send(JSON.stringify(answer));
+		    }
+
 		}
 
 		// Check for game over
@@ -121,6 +151,18 @@ wss.on("connection", function (ws) {
 		    ws.send(JSON.stringify(answer));
 		    gamesMap.get(gameKey).conn[1-player].send(JSON.stringify(answer));
 		}
+		
+		break;
+	    case messages.kind.POSITION_REQUEST:
+		console.log(msg)
+		var game = gamesMap.get(gameKey).gameBoard;
+		st_queue.push({ws: ws, game: game});
+		stockfish.postMessage("position fen "+game.getFen());
+		stockfish.postMessage("go infinite")
+		setTimeout(function(){
+		    stockfish.postMessage("stop");
+		    
+		}, 1000);
 		
 		break;
 	    default:
