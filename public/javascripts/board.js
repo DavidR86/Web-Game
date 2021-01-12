@@ -199,7 +199,7 @@ var outer_data = {getPos: null};
     var player;
     var turn = "white";
     
-    const socket = new WebSocket("ws://localhost:3000");
+    const socket = new WebSocket((window.location.host === "astraria.org") ? "wss://astraria.org" : "ws://localhost:3000");
     socket.onmessage = function(event){
 	let msg = JSON.parse(event.data);
 

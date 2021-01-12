@@ -7,6 +7,7 @@ const websocket = require("ws");
 var messages = require("./public/javascripts/messages");
 
 var port = process.argv[2];
+var sf_enable = (process.argv[3] === "true") ? true : false;
 var app = express();
 
 app.use(express.static(__dirname + "/public"));
@@ -31,7 +32,6 @@ let gamesMap = new Map();
 
 // var game = new GameLogic();
 
-var Stockfish = require("stockfish");
 
 
 var findGame = function(ws){
@@ -79,13 +79,30 @@ var findOpenGameNumber = function() {
     });
     return number;
 }
-var st_queue = [];
+var stockfish_socket;
+if(sf_enable){ stockfish_socket = new websocket("ws://10.66.65.5:3141");
+
+stockfish_socket.onmessage = function(event){
+    var msg = JSON.parse(event.data);
+    console.log(msg);
+    var answer = messages.POSITION_RESPONSE;
+    var gameKey = msg.gameKey;
+    var player = msg.player;
+    var ws = gamesMap.get(gameKey).conn[player];
+    var game = gamesMap.get(gameKey).gameBoard;
+    var move = game.bestmoveToCoord(msg.answer);
+    answer.data = move
+    answer.data.string = event.answer;
+    ws.send(JSON.stringify(answer));
+}
+}
+
+
 
 wss.on("connection", function (ws) {
     var player;
-    var gamekey;
+    var gameKey;
     var found;
-    var stockfish;
 
     ws.on("message", function incoming(message) {
 	let msg = JSON.parse(message);
@@ -106,21 +123,6 @@ wss.on("connection", function (ws) {
 		    msg.player = messages.player.WHITE;
 		    gamesMap.get(gameKey).conn[1-player].send(JSON.stringify(msg));
 		    gamesMap.get(gameKey).started=true;
-		}
-
-		stockfish = new Stockfish();
-		stockfish.onmessage = function(event){
-		    console.log(event);
-		    if(event.includes("bestmove ")){
-			var answer = messages.POSITION_RESPONSE;
-			var data = st_queue.pop();
-			var ws = data.ws;
-			var game = data.game;
-			var move = game.bestmoveToCoord(event);
-			answer.data = game.bestmoveToCoord(event);
-			answer.data.string = event;
-			ws.send(JSON.stringify(answer));
-		    }
 		}
 		break;
 	    case messages.kind.STATISTICS_REQUEST:
@@ -178,16 +180,13 @@ wss.on("connection", function (ws) {
 		
 		break;
 	    case messages.kind.POSITION_REQUEST:
-		console.log(msg)
-		var game = gamesMap.get(gameKey).gameBoard;
-		st_queue.push({ws: ws, game: game});
-		stockfish.postMessage("position fen "+game.getFen());
-		stockfish.postMessage("go infinite")
-		setTimeout(function(){
-		    stockfish.postMessage("stop");
+		if(sf_enable){
+		    console.log(msg)
+		    var game = gamesMap.get(gameKey).gameBoard;
 		    
-		}, 1000);
-		
+		    var data = {gameKey: gameKey, player: player, fen: game.getFen(), answer: null};
+		    stockfish_socket.send(JSON.stringify(data));
+		}
 		break;
 	    default:
 		console.log(msg);
