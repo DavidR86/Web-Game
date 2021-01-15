@@ -3,7 +3,7 @@
 (function(){
 
 
-	const socket = new WebSocket("ws://localhost:3000");
+	const socket = new WebSocket((window.location.host === "astraria.org") ? "wss://astraria.org" : "ws://localhost:3000");
     socket.onopen = function(event){
 	let msg = messages.STATISTICS_REQUEST;
 		socket.send(JSON.stringify(msg));

@@ -129,7 +129,7 @@ var findPlayerNumber = function(){
 }
 
 var stockfish_socket;
-if(sf_enable){ stockfish_socket = new websocket("ws://10.66.65.5:3141");
+if(sf_enable){ stockfish_socket = new websocket("ws://localhost:3141");
 
 stockfish_socket.onmessage = function(event){
     var msg = JSON.parse(event.data);
