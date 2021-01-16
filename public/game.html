@@ -8,13 +8,26 @@
   </head>
   <body>
       <main>
-	  <section id="board_container">
-	      <div=v id="board">
-		  <!-- Grids are generated here via script, and pieces are assigned to them -->
+	  <div class="header">
+	      <h2>Centaur Chess</h2>
+	  </div>
+	  
+	  <div class="row">
+	      <div class="column side" style="background-color:#aaa;"></div>
+	      <div class="column middle" style="background-color:#bbb;">
+		  <div id="board_container">
+		      <div id="board">
+			  <!-- Grids are generated here via script, and pieces are assigned to them -->
+		      </div>
+		  </div>
 	      </div>
-	  </section>
-	  <div id="side panel">
-	      <!-- Game information goes here -->
+	      <div class="column side" style="background-color:#ccc;">
+		  <div class="clock">00:00:00 </div>
+	      </div>
+	  </div>
+	  
+	  <div class="footer">
+	      <p>Made by: David Rockenzahn and Mart Van der Kuil</p>
 	  </div>
     </main>
     <!-- Scripts go here afterwards -->

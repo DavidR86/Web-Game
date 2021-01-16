@@ -1,4 +1,5 @@
 @import "style.css";
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400&display=swap');
 
 :root {
     --rot: rotate(0deg);
@@ -11,26 +12,68 @@
 }
 html {background-color: lightgray}
 
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0px;
+    height: 100vh;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+  background-color: #f1f1f1;
+  text-align: center;
+  font-size: 35px;
+}
+
+.row {
+    flex: 1;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.column {
+}
+
+.column.side {
+   -webkit-flex: 1;
+   -ms-flex: 1;
+   flex: 1;
+}
+
+.column.middle {
+  -webkit-flex: 2;
+  -ms-flex: 2;
+  flex: 4;
+  padding: 15px;
+}
+
+.footer {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+
+
+
 #board_container {
     box-shadow: var(--shadow);
-    width: fit-content;
-    max-width: 100%;
     display: table;
-    margin: auto auto;
-	
-
+    margin: auto;
 }
 
 #board {
-    margin: 0 auto;
-    width: 640px;
-    height: 640px;
+    margin: auto auto;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(8, 1fr);
     border: 35px solid transparent;
     border-image: url(../images/wood-texture.jpg) 300 repeat;
     transform: var(--rot);
+    height: 80vmin;
+    width: 80vmin;
 }
 
 .black {
@@ -92,4 +135,15 @@ html {background-color: lightgray}
     margin: auto;
     display: block;
     transform: var(--rot);
+}
+
+.clock {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 40px;
+    letter-spacing: 5px;
+    font-weight: bold;
+    color: lightgray;
+    background-color: #262626;
+    text-align: center;
+    text-shadow: 2px 2px black;
 }

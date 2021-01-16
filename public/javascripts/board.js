@@ -194,6 +194,27 @@ var outer_data = {getPos: null};
     cells.addPiece(6, 1, "pawn", "black");
     cells.addPiece(7, 1, "pawn", "black");
 
+    var old = null;
+    var clock = null;
+
+    start_clock = function(){
+	const clock = document.querySelector(".clock");
+	let time = new Date(Date.now() - old);
+        let sec = time.getSeconds();
+        let min = time.getMinutes();
+        let hr = time.getHours()-1;
+	
+        if(sec < 10){
+            sec = '0' + sec;
+        }
+        if(min < 10){
+            min = '0' + min;
+        }
+        if(hr < 10){
+            hr = '0' + hr;
+        }
+        clock.textContent = hr + ':' + min + ':' + sec;
+    }    
 
     var GAME_STARTED = false;
     var player;
@@ -205,6 +226,8 @@ var outer_data = {getPos: null};
 
 	switch(msg.kind) {
 	    case messages.kind.GAME_START:
+		old = Date.now();
+		clock = setInterval(start_clock, 1000);
 		GAME_STARTED = true;
 		player = msg.player;
 		window.alert("Game started: you are "+msg.player);
@@ -221,9 +244,11 @@ var outer_data = {getPos: null};
 	    case messages.kind.GAME_DISCONNECTED:
 		window.alert("Game disconnected");
 		console.log(msg);
+		clearInterval(clock);
 		break;
 	    case messages.kind.GAME_WON:
 		window.alert("Game won by: "+msg.player);
+		clearInterval(clock);
 		break;
 	    case messages.kind.PLAYER_MOVE:
 		cells.removePiece(msg.fromX, msg.fromY);
