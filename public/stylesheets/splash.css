@@ -1,1 +1,74 @@
-@import "style.css"
+@import "style.css";
+
+
+body{
+	font-family: Arial, Helvetica, sans-serif;
+	padding: 0px;
+	height: 100vh;
+}
+
+main{
+	display: grid;
+  	grid-template-columns: 1fr 2.5fr;
+  	grid-template-rows: auto 30px;
+  	height: 1vh;
+}
+
+#left.column{
+    display: flex;
+    flex-direction: column;
+}
+
+#left.row{
+	display: flex;
+	flex-direction: row;
+}
+
+#left{
+	background-image: linear-gradient(to right, transparent,#000000);
+}
+
+.black {
+    float: left;
+    width: 1em;
+    height: 1em;
+    background-color: rgba(47,79,79,0.3);
+    font-size:50px;
+    vertical-align:middle;
+}
+
+.white {
+    float: left;
+    width: 1em;
+    height: 1em;
+    background-color: rgb(169,169,169,0.3);
+    font-size:50px;
+    vertical-align:middle;
+}
+
+
+
+#right{
+	color: white;
+	height: auto;
+	width: auto;
+	background-image: url("../images/splashImageRight.png"); 
+	background-position: 360px top;
+	background-attachment: fixed;
+	background-size: 150vh;
+
+}
+
+#right p, h1, h2{
+	color: darkslategray;
+
+}
+ 
+
+
+
+
+
+
+
+
