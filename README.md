@@ -1,4 +1,4 @@
-# Web-Game
+# Centaur Chess
 TUD Web Assignment 1
 
 ![chess image](media/chess1.png)
@@ -27,9 +27,6 @@ Clone the repository, make sure to have npm and nodejs installed, go to the proj
 - ~~Highlight last played piece~~
 - ~~Change tab title content~~
 - ~~Sound~~
-- Information panel with clock & statistics
+- ~~Information panel with clock & statistics~~
 - ~~Add favicon~~
-- Better css
-
-**Other:**
-- Chess piece image license
+- ~~Better css~~
