@@ -10,11 +10,14 @@ A multiplayer web chess game with support for multiple rooms.
 Clone the repository, make sure to have npm and nodejs installed, go to the project directory and run `npm start`. Then go to `localhost:3000` on your browser. You need 2 players for the game to start.
 
 ### Left to implement:
+
+**General:**
+- Remove debug messages & build release version
+
 **Splash screen:**
 - ~~Add css~~
 - Add panel for statistics
 - Better css
-
 
 **Server:**
 - ~~Game over, game start & game disconnected message sending~~
