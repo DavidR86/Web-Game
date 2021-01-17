@@ -215,7 +215,23 @@ var outer_data = {getPos: null};
         }
         clock.textContent = hr + ':' + min + ':' + sec;
     }
+    var turnNumber = 1;
+    var recordMove = function(move, color){
+	if(color==="white"){
+	    var box = document.createElement("div");
+	    box.className+="move_box";
+	    box.innerText = turnNumber+". "+move;
+	    var move_container = document.getElementById("move_container");
+	    move_container.appendChild(box);
+	    turnNumber++;
+	    move_container.scrollTop = move_container.scrollTopMax; // Scroll to bottom
+	}else{
+	    document.getElementById("move_container").lastChild.innerText+=" "+move;	
+	}
+	return;
+    }
 
+    
     var rotate_white = true;
     var rotate_board = function(){
 	document.querySelector(':root').style.setProperty("--rot", (rotate_white) ? "rotate(180deg)" : "rotate(0deg)");
@@ -274,6 +290,8 @@ var outer_data = {getPos: null};
 		cells.focusCells(msg.fromX, msg.fromY, msg.toX, msg.toY, "yellow");
 		document.getElementById("moveSound").play();
 		document.getElementById("turn").innerText = "Turn: "+turn;
+
+		recordMove(msg.san, msg.piece_color);
 		break;
 	    case messages.kind.AVAILABLE_MOVES:
 		cells.highlightCells(msg.data);

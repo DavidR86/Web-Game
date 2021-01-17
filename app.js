@@ -216,6 +216,7 @@ wss.on("connection", function (ws) {
 		    answer.toY = move.toY;
 		    answer.piece = move.piece;
 		    answer.piece_color = move.piece_color;
+		    answer.san = move.san;
 		    ws.send(JSON.stringify(answer));
 		    gamesMap.get(gameKey).conn[1-player].send(JSON.stringify(answer));
 

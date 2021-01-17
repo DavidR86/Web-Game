@@ -91,7 +91,7 @@ game.prototype.checkMove = function(fromX, toX, fromY, toY){
 	    additionalCoord.to = this.SANtoN((this.chess.turn() === "b") ? "f1" : "f8")
 	    additionalPiece = "rook";
 	}
-		return {fromX: fromX, fromY: fromY, toX: toX, toY:toY, player: (this.chess.turn()==="b") ? "black" : "white", piece: this.pToPiece(move.piece), piece_color: (move.color==="b") ? "black" : "white", additionalMove: additionalMove, additionalCoord: additionalCoord, additionalPiece: additionalPiece}
+		return {fromX: fromX, fromY: fromY, toX: toX, toY:toY, player: (this.chess.turn()==="b") ? "black" : "white", piece: this.pToPiece(move.piece), piece_color: (move.color==="b") ? "black" : "white", additionalMove: additionalMove, additionalCoord: additionalCoord, additionalPiece: additionalPiece, san: move.san}
     }
 }
 

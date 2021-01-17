@@ -75,7 +75,8 @@
 	fromY: null,
 	toY: null,
 	piece: null,
-	piece_color: null
+	piece_color: null,
+	san: null
     }
 
     exports.AVAILABLE_MOVES = {

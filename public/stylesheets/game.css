@@ -177,3 +177,19 @@ main {
     text-align: center;
     text-shadow: 2px 2px black;
 }
+
+#move_container{
+    height: 10vmax;
+    background-color: #262626;
+    overflow-y: scroll;
+    border-top: solid 10px #262626;
+}
+
+.move_box{
+    font-size: 0.8vmax;
+    color: white;
+    background-color: grey;
+    padding: 10px 10px;
+    margin: 0px 10px 10px 10px;
+
+}
