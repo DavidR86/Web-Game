@@ -1,5 +1,5 @@
-# Web-Game
-TUD Web Assignment 1
+# Centaur Chess
+TU Delft Web and Database Technologies assignment
 
 ![chess image](media/chess1.png)
 
@@ -27,9 +27,6 @@ Clone the repository, make sure to have npm and nodejs installed, go to the proj
 - ~~Highlight last played piece~~
 - ~~Change tab title content~~
 - ~~Sound~~
-- Information panel with clock & statistics
+- ~~Information panel with clock & statistics~~
 - ~~Add favicon~~
-- Better css
-
-**Other:**
-- Chess piece image license
+- ~~Better css~~
