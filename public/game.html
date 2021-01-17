@@ -13,16 +13,28 @@
 	  </div>
 	  
 	  <div class="row">
-	      <div class="column side" style="background-color:#aaa;"></div>
-	      <div class="column middle" style="background-color:#bbb;">
+	      <div class="column side"></div>
+	      <div class="column middle" >
 		  <div id="board_container">
 		      <div id="board">
 			  <!-- Grids are generated here via script, and pieces are assigned to them -->
 		      </div>
 		  </div>
 	      </div>
-	      <div class="column side" style="background-color:#ccc;">
+	      <div class="column side">
 		  <div class="clock">00:00:00 </div>
+		  <div id="turn">Turn: none</div>
+		      <div class="button_container_v">
+		      <button onclick="window.location.reload(true)">New Game</button>
+		      <div class="button_container_h">
+			  <button disabled>Offer Draw</button>
+			  <button disabled>Surrender</button>
+		      </div>
+			  <div class="button_container_h">
+			  <button onclick="outer_data.rotate_board()">Rotate board</button>
+			  <button onclick="outer_data.getPos()" disabled>Best move</button>
+		      </div>
+		  </div>
 	      </div>
 	  </div>
 	  

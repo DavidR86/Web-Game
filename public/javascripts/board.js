@@ -197,7 +197,7 @@ var outer_data = {getPos: null};
     var old = null;
     var clock = null;
 
-    start_clock = function(){
+    var start_clock = function(){
 	const clock = document.querySelector(".clock");
 	let time = new Date(Date.now() - old);
         let sec = time.getSeconds();
@@ -214,11 +214,23 @@ var outer_data = {getPos: null};
             hr = '0' + hr;
         }
         clock.textContent = hr + ':' + min + ':' + sec;
-    }    
+    }
+
+    var rotate_white = true;
+    var rotate_board = function(){
+	document.querySelector(':root').style.setProperty("--rot", (rotate_white) ? "rotate(180deg)" : "rotate(0deg)");
+	document.querySelector("#board_container").style.boxShadow = "0px 0px black" 
+	setTimeout(function(){
+	    document.querySelector("#board_container").style.boxShadow = "var(--shadow)" 
+	}, 3000);
+	rotate_white = !rotate_white;
+    }
 
     var GAME_STARTED = false;
     var player;
     var turn = "white";
+    //console.log(document.querySelector(":root").style.getPropertyValue("--rot"));
+
     
     const socket = new WebSocket((window.location.host === "astraria.org") ? "wss://astraria.org" : "ws://localhost:3000");
     socket.onmessage = function(event){
@@ -236,10 +248,10 @@ var outer_data = {getPos: null};
 		// Draw board & pieces here
 		if(player === "black"){
 		    // rotate pieces
-		    document.querySelector(':root').style.setProperty("--rot", "rotate(180deg)");
-		    document.getElementById("board").style.setProperty("--shadow","");
-		 
+		    rotate_board();
+		    
 		}
+		document.getElementById("turn").innerText = "Turn: white";
 		break;
 	    case messages.kind.GAME_DISCONNECTED:
 		window.alert("Game disconnected");
@@ -261,6 +273,7 @@ var outer_data = {getPos: null};
 		//Highlight last piece
 		cells.focusCells(msg.fromX, msg.fromY, msg.toX, msg.toY, "yellow");
 		document.getElementById("moveSound").play();
+		document.getElementById("turn").innerText = "Turn: "+turn;
 		break;
 	    case messages.kind.AVAILABLE_MOVES:
 		cells.highlightCells(msg.data);
@@ -287,6 +300,7 @@ var outer_data = {getPos: null};
     }
 
     outer_data.getPos = getPos;
+    outer_data.rotate_board = rotate_board;
 
     socket.onopen = function(){
 	let msg = messages.REQUEST_GAME;

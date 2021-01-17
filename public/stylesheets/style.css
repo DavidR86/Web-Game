@@ -3,6 +3,40 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
+.button_container_v {
+    display: flex;
+    flex-direction: column;
+}
+.button_container_h {
+    display: flex;
+    flex-direction: row;
+}
+
+button {
+    color: white;
+    transition-duration: 0.4s;
+    background-color: darkslategray;
+    border: none;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 2px 4px;
+    cursor: pointer;
+    border: 2px solid darkslategray;
+    flex: 1;
+    font-weight: bold;
+
+}
+
+button:hover {
+    background-color: grey;
+    color: white;
+    border: 2px solid darkslategray;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
