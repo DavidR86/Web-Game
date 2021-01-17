@@ -1,5 +1,5 @@
 # Centaur Chess
-TUD Web Assignment 1
+TU Delft Web and Database Technologies assignment
 
 ![chess image](media/chess1.png)
 
