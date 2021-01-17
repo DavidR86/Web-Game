@@ -21,7 +21,7 @@ main {
 .header {
   background-color: #f1f1f1;
   text-align: center;
-  font-size: 35px;
+  font-size: 1.5vmax;
 }
 
 .row {
@@ -70,8 +70,8 @@ main {
     border-image: url(../images/wood-texture.jpg) 300 repeat;
     transform: var(--rot);
     transition-duration: 3s;
-    height: 80vmin;
-    width: 80vmin;
+    height: 40vmax;
+    width: 40vmax;
     transform-style: preserve-3d;
 }
 
@@ -160,7 +160,7 @@ main {
 
 .clock {
     font-family: 'Orbitron', sans-serif;
-    font-size: 40px;
+    font-size: 1.8vmax;
     letter-spacing: 5px;
     font-weight: bold;
     color: lightgray;
@@ -170,7 +170,7 @@ main {
 }
 
 #turn {
-    font-size: 16px;
+    font-size: 0.8vmax;
     font-weight: bold;
     color: white;
     background-color: #262626;

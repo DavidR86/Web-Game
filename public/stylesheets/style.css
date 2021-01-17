@@ -17,16 +17,16 @@ button {
     transition-duration: 0.4s;
     background-color: darkslategray;
     border: none;
-    padding: 16px 32px;
+    padding: 16px 0px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 0.7vmax;
     margin: 2px 4px;
     cursor: pointer;
     border: 2px solid darkslategray;
-    flex: 1;
     font-weight: bold;
+    flex: 1;
 
 }
 
