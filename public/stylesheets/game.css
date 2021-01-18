@@ -56,6 +56,12 @@ main {
   text-align: center;
 }
 
+@media (max-width: 600px) {
+  .row {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+  }
+}
 
 
 #board_container {
@@ -77,6 +83,14 @@ main {
     width: 40vmax;
     transform-style: preserve-3d;
 }
+@media (max-width: 600px) {
+  #board {
+      height: 80vmin;
+      width: 80vmin;
+      border: none;
+  }
+}
+
 
 .black {
     background-color: darkslategray;
@@ -211,6 +225,6 @@ main {
 
 #logo{
     position: absolute;
-    height: 0.1vmax;
-    width: 0.1vmax;
+    height: 5.1vmax;
+    width: 5.1vmax;
 }
