@@ -34,13 +34,18 @@ app.get('/game/p', function (req, res) {
 })
 
 // Route for splash screen
-app.get('/', function (req, res) {
-    res.sendFile("splash.html", {root: "./public"});
-})
+//app.get('/', function (req, res) {
+//    res.sendFile("splash.html", {root: "./public"});
+//})
 
-const wss = new websocket.Server({ server });
+    app.get('/', function(req, res) {
+	//example of data to render; here gameStatus is an object holding this information
+	res.render('splash.ejs', {playerNumber: totalPlayers, openRooms: findOpenGameNumber(), gamesPlayed: totalGamesPlayed});
+    })
+    
+    const wss = new websocket.Server({ server });
 
-var GameLogic = require("./game");
+    var GameLogic = require("./game");
 
 // gamesMap.set(0 , {gameBoard:null conn:[null, null], available: true, players: 0});
 
