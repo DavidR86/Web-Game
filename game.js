@@ -45,7 +45,7 @@ var game = function() {
     }
 
     this.chess = new Chess()
-    console.log(this.chess.ascii())
+    //console.log(this.chess.ascii())
 }
 
 game.prototype.bestmoveToCoord = function(bestmove){
@@ -55,7 +55,6 @@ game.prototype.bestmoveToCoord = function(bestmove){
 
 game.prototype.getAvailableMoves = function(fromX, fromY){
     var moves = this.chess.moves({square: this.nToL(fromX)+""+((7-fromY)+1)});
-    console.log(moves);
     var cMoves = [];
     moves.forEach(move => {
 	if(!(move===null)){
@@ -64,13 +63,11 @@ game.prototype.getAvailableMoves = function(fromX, fromY){
 	    cMoves.push(this.SANtoN(move));
 	}
     });
-    console.log(cMoves);
     return cMoves;
 }
 
 game.prototype.checkMove = function(fromX, toX, fromY, toY){
     var move = this.chess.move({from: this.NtoSAN(fromX, fromY), to: this.NtoSAN(toX, toY)});
-    console.log(move);
 
     if(move===null){
 	return null;
@@ -99,7 +96,6 @@ game.prototype.checkGameOver = function(){
     var checkMate = this.chess.in_checkmate();
 
     if(checkMate){
-	console.log("turn: "+this.chess.turn())
 	return {game_over: true, type: "checkmate", winner:(this.chess.turn()==="w") ? "black" : "white"};
     }else{
 	return {game_over: false};

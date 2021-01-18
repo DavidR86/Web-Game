@@ -46,7 +46,7 @@
 
     exports.STATISTICS_REQUEST = {
 	kind: exports.kind.STATISTICS_REQUEST,
-	data: {gamesNumber: null, openRooms: null, time: "not available"}
+	data: {playerNumber: "n/a", openRooms: "n/a", gamesPlayed: "n/a"}
     }
 
     exports.POSITION_REQUEST = {

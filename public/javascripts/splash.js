@@ -16,7 +16,7 @@
 		let msg = JSON.parse(event.data);
 	    if(msg.kind===messages.kind.STATISTICS_REQUEST){
 		console.log(msg)
-		document.getElementById("totalTime").textContent = "The total time played is: " + msg.data.time;
+		document.getElementById("totalTime").textContent = "The total amount of games played is: " + msg.data.gamesPlayed;
 		document.getElementById("openRooms").textContent = "The amount of open rooms at this moment is: "+msg.data.openRooms;
 		document.getElementById("numPlayers").textContent = "The amount of players is: "+msg.data.playerNumber;
 	    }

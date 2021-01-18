@@ -84,7 +84,6 @@ var findGame = function(ws){
 
 var create_private_room = function(ws, key){
     player = 0;
-    console.log(key)
     gamesMap.set(key, {gameBoard: new GameLogic(), conn: [ws, null], available: false, players:1, started: false})
     
     let msg = messages.REQUEST_GAME;
@@ -96,7 +95,6 @@ var create_private_room = function(ws, key){
 }
 
 var join_private_room = function(ws, key){
-    console.log(key)
     if(gamesMap.has(key) && gamesMap.get(key).players===1){
 	var game = gamesMap.get(key);
 	game.conn[1] = ws;
@@ -120,7 +118,10 @@ var findOpenGameNumber = function() {
     return number;
 }
 
-var findPlayerNumber = function(){
+var totalPlayers = 0;
+var totalGamesPlayed = 0;
+
+var findInGamePlayerNumber = function(){
     var number = 0;
     gamesMap.forEach((game, gkey) => {
 	number+=game.players;
@@ -149,6 +150,7 @@ stockfish_socket.onmessage = function(event){
 
 
 wss.on("connection", function (ws) {
+    totalPlayers++;
     var player;
     var gameKey;
     var found;
@@ -161,14 +163,11 @@ wss.on("connection", function (ws) {
 	    case messages.kind.REQUEST_GAME:
 		var private_room = msg.private_room;
 		var room_key = parseFloat("0."+msg.room_key);
-		console.log(msg)
 
 		if(private_room && (!gamesMap.has(room_key))){
-		    console.log("create_private")
 		    found = create_private_room(ws, room_key);
 		}else if(private_room && gamesMap.has(room_key)){
 		    found = join_private_room(ws, room_key);
-		    console.log("join_private")
 		    if(!found.joined) break;
 		}else{
 		    found = findGame(ws);
@@ -187,12 +186,15 @@ wss.on("connection", function (ws) {
 		    msg.player = messages.player.WHITE;
 		    gamesMap.get(gameKey).conn[1-player].send(JSON.stringify(msg));
 		    gamesMap.get(gameKey).started=true;
+
+		    // Game started. Increase game number counter;
+		    totalGamesPlayed++;
 		}
 		break;
 	    case messages.kind.STATISTICS_REQUEST:
 		var answer = msg;
 		
-		msg.data = {playerNumber: findPlayerNumber(), openRooms: findOpenGameNumber(), time: "not available"}
+		msg.data = {playerNumber: totalPlayers, openRooms: findOpenGameNumber(), gamesPlayed: totalGamesPlayed}
 		ws.send(JSON.stringify(answer));
 		break;
 	    case messages.kind.GET_AV_MOVES:
@@ -205,7 +207,6 @@ wss.on("connection", function (ws) {
 	    case messages.kind.CHECK_MOVE:
 		var game = gamesMap.get(gameKey).gameBoard;
 		var move = game.checkMove(msg.fromX, msg.toX, msg.fromY, msg.toY);
-		console.log(move);
 
 		if(!(move===null)){
 		    var answer = messages.PLAYER_MOVE;
@@ -235,7 +236,6 @@ wss.on("connection", function (ws) {
 
 		// Check for game over
 		var checkGameOver = game.checkGameOver();
-		console.log(game.checkGameOver())
 		if(checkGameOver.game_over){
 		    var answer = messages.GAME_WON;
 		    answer.player = checkGameOver.winner;
@@ -246,7 +246,6 @@ wss.on("connection", function (ws) {
 		break;
 	    case messages.kind.POSITION_REQUEST:
 		if(sf_enable){
-		    console.log(msg)
 		    var game = gamesMap.get(gameKey).gameBoard;
 		    
 		    var data = {gameKey: gameKey, player: player, fen: game.getFen(), answer: null};
@@ -254,20 +253,17 @@ wss.on("connection", function (ws) {
 		}
 		break;
 	    default:
-		console.log(msg);
 		
 	}
     });
 
     ws.on('close', function closed(event) {
-	console.log(event);
-
+	totalPlayers--;
 	if(!gamesMap.has(gameKey)){return; }; // Game already deleted
 	
 	// Notify other player if game started
 	if(gamesMap.get(gameKey).started){
 	    let msg = messages.GAME_DISCONNECTED;
-	    console.log(msg);
 	    gamesMap.get(gameKey).conn[1-player].send(JSON.stringify(msg));
 	}
 	// Free resources.
