@@ -9,6 +9,8 @@ A multiplayer web chess game with support for multiple rooms.
 ### Building & Running
 Clone the repository, make sure to have npm and nodejs installed, go to the project directory and run `npm start`. Then go to `localhost:3000` on your browser. You need 2 players for the game to start.
 
+The game has an additional repository in the sf_server folder. This is a separate server where the stockfish.js chess engine runs. The main server can ask this other server for moves in order to play against the AI or simply to see what the recommended engine move is. Currently only the second feature is implemented.
+
 ### Left to implement:
 
 **General:**
@@ -16,8 +18,8 @@ Clone the repository, make sure to have npm and nodejs installed, go to the proj
 
 **Splash screen:**
 - ~~Add css~~
-- Add panel for statistics
-- Better css
+-~~Add panel for statistics~~
+- ~~Better css~~
 
 **Server:**
 - ~~Game over, game start & game disconnected message sending~~
