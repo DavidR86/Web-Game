@@ -118,7 +118,6 @@ var outer_data = {getPos: null};
 	    boardContainer.insertAdjacentElement("beforeend", cell);
 	    cell.addEventListener("click", function cellClick(e) {
 		let cell = event.currentTarget;
-		console.log(cell);
 		cells.removeAllHighlight();
 		//cells.addPiece(e.currentTarget.x, e.currentTarget.y, "rook", "white");
 		//cells.highlight(cell.x, cell.y);
@@ -135,8 +134,6 @@ var outer_data = {getPos: null};
 		    cells.hasSelected = false;
 
 		}else if(cell.firstChild!=null && (cell.firstChild.color ===  player && player === turn)){
-		    console.log(cell.firstChild);
-
 		    // Ask for av moves
 		    let msg = messages.GET_AV_MOVES;
 		    msg.fromX = cell.x;
@@ -155,8 +152,6 @@ var outer_data = {getPos: null};
     }
 
     var cells = new Cells(cellsArr);
-    console.log(cells);
-
     // Put pieces
     cells.addPiece(0, 7, "rook", "white");
     cells.addPiece(1, 7, "knight", "white");
@@ -245,7 +240,6 @@ var outer_data = {getPos: null};
     var GAME_STARTED = false;
     var player;
     var turn = "white";
-    //console.log(document.querySelector(":root").style.getPropertyValue("--rot"));
 
     
     const socket = new WebSocket((window.location.host === "astraria.org") ? "wss://astraria.org" : "ws://localhost:3000");
@@ -282,7 +276,6 @@ var outer_data = {getPos: null};
 		cells.removePiece(msg.fromX, msg.fromY);
 		cells.addPiece(msg.toX, msg.toY, msg.piece, msg.piece_color);
 		turn = msg.player;
-		console.log(turn+" "+player)
 		if(turn === player){ document.title+=" 🔔"; }else{document.title = document.title.replace(" 🔔", "");} // Tab bell icon
 		cells.hasSelected = false;
 
