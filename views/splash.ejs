@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>Centaur Chess</title>
+      <link rel="stylesheet" href="stylesheets/splash.css" />
+      <link rel="shortcut icon" type="image/jpg" href="images/centaur2.png"/>
+  </head>
+  <body>
+    <main>
+      <div id = "left" >
+       <div class = "empty"></div>
+      </div>
+      <div id = "right">
+        <h1>Centaur Chess</h1>
+        <h2></h2>
+	
+        <p id = totalTime>The total amount of games played: <%= gamesPlayed %> </p>
+        <p id = openRooms>The amount of open rooms at this moment is:  <%= openRooms %></p>
+        <p id = numPlayers>The amount of players is:  <%= playerNumber %></p>
+        <section id="right">
+          <form action="/game" method="get">
+              <button type="submit">Public Game</button>
+          </form>
+          <form action="/game/p" method="get">
+              <button type="submit">Create Private Room</button>
+          </form>
+        </section>
+      </div>
+      <script src="javascripts/messages.js"></script>
+      <!--
+      <script src="javascripts/splash.js"></script>
+      -->
+    </main>
+  </body>
+</html>
