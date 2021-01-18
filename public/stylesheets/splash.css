@@ -47,7 +47,15 @@ main{
 	background-size: 140vh;
 }
 
-#right p, h1, h2{
+
+#right h1{
+    font-size: 80px;
+    position: relative;
+    padding: 0px 20px;
+    color: darkslategray;
+    text-shadow: 5px 5px #FFFFFF;
+}
+#right p, h2{
     position: relative;
     padding: 0px 20px;
 	color: darkslategray;
