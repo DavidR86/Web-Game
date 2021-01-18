@@ -1,3 +1,4 @@
+(function() {
 
 var express = require("express");
 var http = require("http");
@@ -275,3 +276,4 @@ wss.on("connection", function (ws) {
 });
     
 server.listen(port);
+}());
