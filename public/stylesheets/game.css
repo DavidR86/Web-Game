@@ -1,5 +1,4 @@
 @import "style.css";
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400&display=swap');
 
 :root {
     --rot: rotate(0deg);
@@ -8,7 +7,7 @@
 html {background-color: lightgray}
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Orbitron', sans-serif;
     padding: 0px;
     height: 100vh;
 }
@@ -19,9 +18,10 @@ main {
 }
 
 .header {
-  background-color: #f1f1f1;
+  background-color: darkslategray;
   text-align: center;
-  font-size: 1.5vmax;
+  font-size: 1vmax;
+  color: white;
 }
 
 .row {
@@ -38,6 +38,9 @@ main {
    -ms-flex: 1;
    flex: 1;
    background-color: dimgray;
+    background-image: url("../images/splashImageRight.png"); 
+    background-attachment: fixed;
+    background-repeat: round;
 }
 
 .column.middle {
@@ -45,7 +48,7 @@ main {
   -ms-flex: 2;
   flex: 4;
   padding: 15px;
-  background-color: grey;
+  background-color: lightgray;
 }
 
 .footer {

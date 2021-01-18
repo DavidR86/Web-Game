@@ -1,23 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400&display=swap');
+
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+  font-family: 'Orbitron', sans-serif;}
 
 .button_container_v {
     display: flex;
     flex-direction: column;
+    background-color: #262626;
+
 }
 .button_container_h {
     display: flex;
     flex-direction: row;
 }
 
+h1 {
+    color: white;
+    text-shadow: 6px 6px black;
+    font-family: 'Bungee', cursive;
+}
+
 button {
+    font-family: 'Orbitron', sans-serif;	
     color: white;
     transition-duration: 0.4s;
     background-color: darkslategray;
     border: none;
-    padding: 16px 0px;
+    padding: 16px 8px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -31,8 +42,8 @@ button {
 }
 
 button:hover {
-    background-color: grey;
-    color: white;
+    background-color: white;
+    color: darkslategray;
     border: 2px solid darkslategray;
 }
 
