@@ -14,17 +14,14 @@ main{
   	height: 1vh;
 }
 
-
 .empty{
     background-color: transparent;
 }
-
 
 #left {
     color: black;
     height: 140vh;
     width: 30vw;
-    background-image: linear-gradient(to right, transparent,#000000);
 	background-image: url("../images/chessPattern.png");
     
     background-position: left top;
@@ -32,14 +29,17 @@ main{
     background-size: contain;
     animation: left_anim 8s;
 }
-    
+
 @keyframes left_anim {
     0%   {filter: brightness(0);}
     100% {filter: brightness(1);}
 }
 
 
+
 #right{
+    position: absolute;
+    left:30vw;
 	color: white;
 	height: 112.25vh;
 	width: 70vw;
@@ -49,7 +49,6 @@ main{
 	background-size: 140vh;
 }
 
-
 #right h1{
     font-size: 80px;
     position: relative;
@@ -57,16 +56,26 @@ main{
     color: darkslategray;
     text-shadow: 5px 5px #FFFFFF;
 }
+
 #right p, h2{
     position: relative;
     padding: 0px 20px;
 	color: darkslategray;
 }
 
+#right h2::before{
+    content: "Join a room to play a game"
+}
+
+#right h2::after{
+    content: "!"
+}
+
 #right button{
     position: relative;
     left: 20px;
 }
+
 
 
 
