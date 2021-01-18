@@ -99,7 +99,8 @@ game.prototype.checkGameOver = function(){
     var checkMate = this.chess.in_checkmate();
 
     if(checkMate){
-	return {game_over: true, type: "checkmate", winner:(this.chess.turn()==="b") ? "black" : "white"};
+	console.log("turn: "+this.chess.turn())
+	return {game_over: true, type: "checkmate", winner:(this.chess.turn()==="w") ? "black" : "white"};
     }else{
 	return {game_over: false};
     }
