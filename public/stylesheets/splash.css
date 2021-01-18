@@ -14,13 +14,9 @@ main{
   	height: 1vh;
 }
 
-
-
-
 .empty{
     background-color: transparent;
 }
-
 
 #left {
     color: black;
@@ -32,10 +28,7 @@ main{
     background-attachment: fixed;
     background-size: contain;
 }
-
-    
-
-
+  
 #right{
     position: absolute;
     left:30vw;
@@ -48,7 +41,6 @@ main{
 	background-size: 140vh;
 }
 
-
 #right h1{
     font-size: 80px;
     position: relative;
@@ -56,6 +48,7 @@ main{
     color: darkslategray;
     text-shadow: 5px 5px #FFFFFF;
 }
+
 #right p, h2{
     position: relative;
     padding: 0px 20px;
