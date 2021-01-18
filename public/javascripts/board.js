@@ -259,7 +259,7 @@ var GameFunctions = (function () {
 		    rotate_board();
 		    
 		}
-		document.getElementById("turn").innerText = "Turn: white";
+		document.getElementById("turn").innerText = "white";
 		break;
 	    case messages.kind.GAME_DISCONNECTED:
 		window.alert("Game disconnected");
@@ -280,7 +280,7 @@ var GameFunctions = (function () {
 		//Highlight last piece
 		cells.focusCells(msg.fromX, msg.fromY, msg.toX, msg.toY, "yellow");
 		document.getElementById("moveSound").play();
-		document.getElementById("turn").innerText = "Turn: "+turn;
+		document.getElementById("turn").innerText = turn;
 
 		recordMove(msg.san, msg.piece_color);
 		break;

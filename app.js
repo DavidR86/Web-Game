@@ -148,7 +148,7 @@ stockfish_socket.onmessage = function(event){
     var game = gamesMap.get(gameKey).gameBoard;
     var move = game.bestmoveToCoord(msg.answer);
     answer.data = move
-    answer.data.string = event.answer;
+    answer.data.string = msg.answer;
     ws.send(JSON.stringify(answer));
 }
 }
