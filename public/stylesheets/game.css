@@ -181,6 +181,14 @@ main {
     text-shadow: 2px 2px black;
 }
 
+#turn::before{
+    content: "Turn: ";
+}
+
+#turn::after{
+    content:"'s"
+}
+
 #move_container{
     height: 10vmax;
     background-color: #262626;
@@ -195,4 +203,14 @@ main {
     padding: 10px 10px;
     margin: 0px 10px 10px 10px;
 
+}
+
+.move_box:active{
+    filter: brightness(1.1);
+}
+
+#logo{
+    position: absolute;
+    height: 0.1vmax;
+    width: 0.1vmax;
 }

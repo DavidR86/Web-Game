@@ -30,11 +30,13 @@ main{
     background-position: left top;
     background-attachment: fixed;
     background-size: contain;
+    animation: left_anim 8s;
 }
     
-    
-
-
+@keyframes left_anim {
+    0%   {filter: brightness(0);}
+    100% {filter: brightness(1);}
+}
 
 
 #right{
