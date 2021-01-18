@@ -1,7 +1,5 @@
-var outer_data = {getPos: null};
-
-(function (outer_data) {
-
+var GameFunctions = (function () {
+    var outer_data = {enableHelp: null, getPos: null, rotate_board: null}
     // Create logical board
     function Cells(cells) {
 	this.cells = cells;
@@ -310,6 +308,11 @@ var outer_data = {getPos: null};
 	socket.send(JSON.stringify(msg));
     }
 
+
+    outer_data.enableHelp  = function(){
+	document.getElementById("bestMoveButton").disabled=false;
+    };
+
     outer_data.getPos = getPos;
     outer_data.rotate_board = rotate_board;
 
@@ -322,5 +325,5 @@ var outer_data = {getPos: null};
 	}
         socket.send(JSON.stringify(msg));
     };
-    
-})(outer_data);
+    return outer_data;
+})();
