@@ -12,12 +12,13 @@
       </div>
       <div id = "right">
         <h1>Centaur Chess</h1>
-        <h2></h2>
-	
-        <p id = totalTime>The total amount of games played: <%= gamesPlayed %> </p>
-        <p id = openRooms>The amount of open rooms at this moment is:  <%= openRooms %></p>
-        <p id = numPlayers>The amount of players is:  <%= playerNumber %></p>
-        <section id="right">
+	<div id="text_container">
+	  <h2></h2>
+	  <p id = totalTime>The total amount of games played: <%= gamesPlayed %> </p>
+          <p id = openRooms>The amount of open rooms at this moment is:  <%= openRooms %></p>
+          <p id = numPlayers>The amount of players is:  <%= playerNumber %></p>
+	</div>
+        <section id="right2">
           <form action="/game" method="get">
               <button type="submit">Public Game</button>
           </form>

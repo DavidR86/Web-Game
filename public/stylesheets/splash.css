@@ -27,7 +27,7 @@ main{
     background-position: left top;
     background-attachment: fixed;
     background-size: contain;
-    animation: left_anim 8s;
+    animation: left_anim 4s cubic-bezier(.47,0,.74,.71);
 }
 
 @keyframes left_anim {
@@ -40,13 +40,18 @@ main{
 #right{
     position: absolute;
     left:30vw;
-	color: white;
-	height: 112.25vh;
-	width: 70vw;
-	background-image: url("../images/splashImageRight.png"); 
-	background-position: 400px top;
-	background-attachment: fixed;
-	background-size: 140vh;
+    color: white;
+    height: 112.25vh;
+    width: 70vw;
+    background-image: url("../images/splashImageRight.png"); 
+    background-size: auto 82vw;
+}
+
+#right2{
+    position: absolute;
+    left:30vw;
+    color: white;
+    margin: 5vmax;
 }
 
 #right h1{
@@ -60,7 +65,7 @@ main{
 #right p, h2{
     position: relative;
     padding: 0px 20px;
-	color: darkslategray;
+    color: white;
 }
 
 #right h2::before{
@@ -76,6 +81,11 @@ main{
     left: 20px;
 }
 
+#text_container{
+    background: RGB(47, 79, 79, 0.5);
+    margin: 10px 20px 20px 20px;
+    padding: 3px;
+}
 
 
 
