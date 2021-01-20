@@ -1,5 +1,8 @@
 var GameFunctions = (function () {
     var outer_data = {enableHelp: null, getPos: null, rotate_board: null}
+
+    var col_num = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+    
     // Create logical board
     function Cells(cells) {
 	this.cells = cells;
@@ -98,10 +101,27 @@ var GameFunctions = (function () {
     var boardContainer = document.getElementById('board');
     // boardContainer.className = "container";
     let cellsArr = new Array(8);
+    var border = document.createElement("div");
+    border.className = "board_border";
+    boardContainer.insertAdjacentElement("beforeend", border);
+    for(var i = 0;  i<8; i++){
+	var border = document.createElement("div");
+	border.innerText = col_num[i];
+	border.className = "board_border";
+	boardContainer.insertAdjacentElement("beforeend", border);
+    }
+    var border = document.createElement("div");
+    border.className = "board_border";
+    boardContainer.insertAdjacentElement("beforeend", border);
     
     // Create physical tiles in board
     for(var i = 0; i < 8; i++) {
 	cellsArr[i] = new Array(8);
+	var border = document.createElement("div");
+	border.innerText = (8-i);
+	border.className = "board_border";
+	boardContainer.insertAdjacentElement("beforeend", border);
+
 	for(var j = 0; j < 8; j++) {
 	    var cell = document.createElement("div");
 	    cell.id = (i+1).toString()+"-"+(j+1).toString();
@@ -149,7 +169,23 @@ var GameFunctions = (function () {
 
 	    });
 	}
+	var border = document.createElement("div");
+	border.innerText = (8-i);
+	border.className = "board_border";
+	boardContainer.insertAdjacentElement("beforeend", border);
     }
+    var border = document.createElement("div");
+    border.className = "board_border";
+    boardContainer.insertAdjacentElement("beforeend", border);
+    for(var i = 0;  i<8; i++){
+	var border = document.createElement("div");
+	border.innerText = col_num[i];
+	border.className = "board_border";
+	boardContainer.insertAdjacentElement("beforeend", border);
+    }
+    var border = document.createElement("div");
+    border.className = "board_border";
+    boardContainer.insertAdjacentElement("beforeend", border);
 
     var cells = new Cells(cellsArr);
     // Put pieces

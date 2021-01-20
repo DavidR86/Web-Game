@@ -73,8 +73,8 @@ main {
 #board {
     margin: auto auto;
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(8, 1fr);
+    grid-template-columns: 0.7vmax repeat(8, 1fr) 0.7vmax;
+    grid-template-rows: 0.7vmax repeat(8, 1fr) 0.7vmax;
     border: 35px solid transparent;
     border-image: url(../images/wood-texture.jpg) 300 repeat;
     transform: var(--rot);
@@ -82,6 +82,7 @@ main {
     height: 40vmax;
     width: 40vmax;
     transform-style: preserve-3d;
+    background-color: #1a1a1a;
 }
 @media (max-width: 600px) {
   #board {
@@ -91,6 +92,13 @@ main {
   }
 }
 
+.board_border {
+    text-align: center;
+    color: white;
+    transform: var(--rot);
+    font-size: 0.5vmax;
+    margin: auto;
+}
 
 .black {
     background-color: darkslategray;
