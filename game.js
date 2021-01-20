@@ -15,9 +15,14 @@ var game = function() {
     }
 
     this.SANtoN = function(pos){
+	var promotion = false;
 	pos=pos.replace("+", "");
 	pos=pos.replace("#", "");
-	    return {x:(this.lToN(pos.charAt(pos.length-2))), y:(8-Number(pos.charAt(pos.length-1)))};
+	if(pos.includes("=")){
+	    pos = pos.replace(/=.*/, "");
+	    promotion = true;
+	}
+	return {x:(this.lToN(pos.charAt(pos.length-2))), y:(8-Number(pos.charAt(pos.length-1))), promotion: promotion};
     }
 
     this.NtoSAN = function(x, y){
@@ -55,6 +60,7 @@ game.prototype.bestmoveToCoord = function(bestmove){
 
 game.prototype.getAvailableMoves = function(fromX, fromY){
     var moves = this.chess.moves({square: this.nToL(fromX)+""+((7-fromY)+1)});
+    //console.log(this.chess.moves({square: this.nToL(fromX)+""+((7-fromY)+1), verbose: true}));
     var cMoves = [];
     moves.forEach(move => {
 	if(!(move===null)){
@@ -67,7 +73,7 @@ game.prototype.getAvailableMoves = function(fromX, fromY){
 }
 
 game.prototype.checkMove = function(fromX, toX, fromY, toY){
-    var move = this.chess.move({from: this.NtoSAN(fromX, fromY), to: this.NtoSAN(toX, toY)});
+    var move = this.chess.move({from: this.NtoSAN(fromX, fromY), to: this.NtoSAN(toX, toY), promotion:'q'});
 
     if(move===null){
 	return null;
@@ -76,6 +82,7 @@ game.prototype.checkMove = function(fromX, toX, fromY, toY){
 	var additionalCoord = {from: null, to: null};
 	var additionalPiece = null;
 	console.log(this.chess.ascii());
+	console.log(move);
 	if(move.san === "O-O-O"){
 	    additionalMove = true;
 	    additionalCoord.from = this.SANtoN((this.chess.turn() === "b") ? "a1" : "a8")
@@ -87,8 +94,14 @@ game.prototype.checkMove = function(fromX, toX, fromY, toY){
 	    additionalCoord.from = this.SANtoN((this.chess.turn() === "b") ? "h1" : "h8")
 	    additionalCoord.to = this.SANtoN((this.chess.turn() === "b") ? "f1" : "f8")
 	    additionalPiece = "rook";
+	}else if(move.promotion === 'q' || move.promotion === 'r' ||move.promotion === 'b' || move.promotion === 'n'){
+	    additionalMove = true;
+	    additionalPiece = this.pToPiece(move.promotion);
+	    additionalCoord.from = {x: toX, y:toY};
+	    additionalCoord.to = {x: toX, y:toY};
+
 	}
-		return {fromX: fromX, fromY: fromY, toX: toX, toY:toY, player: (this.chess.turn()==="b") ? "black" : "white", piece: this.pToPiece(move.piece), piece_color: (move.color==="b") ? "black" : "white", additionalMove: additionalMove, additionalCoord: additionalCoord, additionalPiece: additionalPiece, san: move.san}
+	return {fromX: fromX, fromY: fromY, toX: toX, toY:toY, player: (this.chess.turn()==="b") ? "black" : "white", piece: this.pToPiece(move.piece), piece_color: (move.color==="b") ? "black" : "white", additionalMove: additionalMove, additionalCoord: additionalCoord, additionalPiece: additionalPiece, san: move.san}
     }
 }
 

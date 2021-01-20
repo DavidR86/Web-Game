@@ -53,7 +53,9 @@ var GameFunctions = (function () {
     
     
     Cells.prototype.highlight = function(x, y){
-	this.get(x,y).className+=" highlight";
+	if(!this.get(x,y).className.includes(" highlight")){
+	    this.get(x,y).className+=" highlight";
+	}
     }
 
     Cells.prototype.removeHighlight = function(x, y){
@@ -286,6 +288,7 @@ var GameFunctions = (function () {
 		break;
 	    case messages.kind.AVAILABLE_MOVES:
 		cells.highlightCells(msg.data);
+		//console.log(msg.data);
 		break;
 	    case messages.kind.POSITION_RESPONSE:
 		cells.focusCells(msg.data.from.x, msg.data.from.y, msg.data.to.x, msg.data.to.y, "red");
