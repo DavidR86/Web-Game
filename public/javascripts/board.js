@@ -356,6 +356,7 @@ var GameFunctions = (function () {
     outer_data.rotate_board = rotate_board;
 
     socket.onopen = function(){
+	//window.alert("The game will start as soon as another player joins");
 	let msg = messages.REQUEST_GAME;
 	const params = new URLSearchParams(window.location.search);
 	if(params.has("room")){
