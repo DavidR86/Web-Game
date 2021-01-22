@@ -112,13 +112,13 @@ main {
 
 .last_move {
     border-style: dotted;
-    border-width: 3px;
+    border-width: 0.16vmax;
     border-color: khaki;
 }
 
 .position {
     border-style: dotted;
-    border-width: 3px;
+    border-width: 0.16vmax;
     border-color: brown;
 }
 
